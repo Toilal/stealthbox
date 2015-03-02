@@ -1,0 +1,8 @@
+schedules:
+  - tasks: '*'
+    interval:
+      minutes: 15
+
+tasks:
+  sample:
+    rss: http://example.com
