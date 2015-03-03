@@ -11,13 +11,13 @@ sharing in the cloud and download content to your home.
 ## Install
 
 ```bash
-docker run -d -it -p 8080:80 -p 8022:22 --name stealthbox toilal/stealthbox
+docker run -d -it -p 8443:443 -p 8022:22 -p 6881:6881 --name stealthbox toilal/stealthbox
 ```
 
 ## Components
 
 - Change password for each component as soon as possible.
-- Replace &lt;stealthbox&gt; with IP address of your server and &lt;8080&gt;/&lt;8022&gt; with
+- Replace &lt;stealthbox&gt; with IP address of your server and &lt;8443&gt;/&lt;8022&gt; with
 ports used on `docker run`.
 
 ### [Pydio](https://pyd.io/)
@@ -28,7 +28,7 @@ interfaces (web / mobile / desktop), Pydio provides enterprise-grade features
 to gain back control and privacy of your data: user directory connectors,
 legacy filesystems drivers, comprehensive admin interface, and much more.
 
-> web: http://&lt;stealthbox&gt;:&lt;8080&gt;<br>
+> web: https://&lt;stealthbox&gt;:&lt;8443&gt;<br>
 > username: box<br>
 > password: box12345
 
@@ -42,7 +42,7 @@ cross-platform BitTorrent client.
 - Plugin System
 - Much more ...
 
-> web: http://&lt;stealthbox&gt;:&lt;8080&gt;/deluge<br>
+> web: https://&lt;stealthbox&gt;:&lt;8443&gt;/deluge<br>
 > password: box12345
 > configuration: ~/.config/deluge
 > service: deluge

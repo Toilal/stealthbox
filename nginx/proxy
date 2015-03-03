@@ -1,10 +1,13 @@
 server {
-  listen 80;
+  listen 443 ssl;
 
   keepalive_requests    10;
   keepalive_timeout     60 60;
   access_log /home/box/nginx/access.proxy.log;
   error_log /home/box/nginx/error.proxy.log;
+
+  ssl_certificate /home/box/ssl/stealthbox.crt;
+  ssl_certificate_key /home/box/ssl/stealthbox.key;
 
   location / {
     root /opt/pydio;

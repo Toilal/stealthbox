@@ -132,6 +132,8 @@ RUN ln -s /usr/bin/sv /etc/init.d/nginx
 RUN mkdir -p /opt/stealthbox
 ADD stealthbox /opt/stealthbox
 
+ADD my_init.d/* /etc/my_init.d/
+
 # +---------+
 # | PREPARE |
 # +---------+
@@ -145,4 +147,4 @@ RUN rm -f /etc/service/sshd/down
 
 # Mount home volume and expose required ports
 VOLUME /home/box
-EXPOSE 80 22 8112 6881 58846
+EXPOSE 443 22 6881 58846
