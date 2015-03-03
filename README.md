@@ -6,7 +6,13 @@ StealthBox is a [Docker](https://www.docker.com/) image, so you can install it
 on any linux server without polluting it.
 
 It embeds several applications that are configured together to automate file 
-sharing in the cloud and download content to your home.
+sharing in the cloud and download content to your home: 
+
+- [Deluge](http://deluge-torrent.org/), a BitTorrent client with Web User
+Interface.
+- [Pydio](https://pyd.io/), a web application to view, edit and download files.
+- [FlexGet](http://flexget.com/), a multipurpose automation tool for torrent,
+nbz, series, movies, etc.
 
 ## Install
 
@@ -19,9 +25,9 @@ docker run -d \
 
 ## Components
 
-- Change password for each component as soon as possible.
+- Change password for each component as soon as container is running.
 - Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>`
-with ports used on `docker run`.
+with ports used in `docker run` command.
 
 ### [Pydio](https://pyd.io/)
 
@@ -157,4 +163,6 @@ Web server will then be available at `http://<stealthbox>:8080`.
 `tcp/6881` is the port use by Torrent protocol in deluge. Your have to map
 this port on the same host port.
 
-If you really need to change this port, you will have to edit deluge configuration for port to match, in web UI, or in `/home/box/.config/deluge/core.conf` (`listen_ports` parameter). You may also map a port range.
+If tcp/6881 is not available on host, or if you really need to change this
+port, you have to configure deluge for port to match, in web UI, or in 
+`/home/box/.config/deluge/core.conf` (`listen_ports` parameter).
