@@ -18,7 +18,6 @@ ENV HOME /root
 RUN rm -f /etc/apt/apt.conf.d/docker-gzip-indexes
 
 # Add custom apt sources
-ADD apt-sources/* /etc/apt/sources.list.d/
 RUN add-apt-repository ppa:deluge-team/ppa
 RUN apt-get update -y
 
