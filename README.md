@@ -10,16 +10,15 @@ sharing in the cloud and download content to your home.
 
 ## Install
 
-TODO: Publish in docker registry.
 ```bash
-docker run -d -it -p 8080:80 -p 8022:22
+docker run -d -it -p 8080:80 -p 8022:22 --name stealthbox toilal/stealthbox
 ```
 
 ## Components
 
-- You should change password for each component as soon as possible.
-- Replace <stealthbox> with IP address of your server and <8080>/<8022> with
-ports used when running docker.
+- Change password for each component as soon as possible.
+- Replace &lt;stealthbox&gt; with IP address of your server and &lt;8080&gt;/&lt;8022&gt; with
+ports used on `docker run`.
 
 ### [Pydio](https://pyd.io/)
 
@@ -29,7 +28,7 @@ interfaces (web / mobile / desktop), Pydio provides enterprise-grade features
 to gain back control and privacy of your data: user directory connectors,
 legacy filesystems drivers, comprehensive admin interface, and much more.
 
-> web: http://<stealthbox>:<8080><br>
+> web: http://&lt;stealthbox&gt;:&lt;8080&gt;<br>
 > username: box<br>
 > password: box12345
 
@@ -43,7 +42,7 @@ cross-platform BitTorrent client.
 - Plugin System
 - Much more ...
 
-> web: http://<stealthbox>:<8080>/deluge<br>
+> web: http://&lt;stealthbox&gt;:&lt;8080&gt;/deluge<br>
 > password: box12345
 > configuration: ~/.config/deluge
 > service: deluge
@@ -53,7 +52,7 @@ cross-platform BitTorrent client.
 Access StealthBox through SSH/SCP/SFTP to bring content back to home and manage
 the environment.
 
-> ssh: ssh -p <8022> <stealthbox><br>
+> ssh: ssh -p &lt;8022&gt; &lt;stealthbox&gt;<br>
 > username: box<br>
 > password: box12345<br>
 > service: sshd
