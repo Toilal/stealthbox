@@ -1,0 +1,7 @@
+#!/bin/bash
+
+chmod 770 /etc/service/ssl-when-changed/supervise
+chown box:box -R /etc/service/ssl-when-changed/supervise
+
+cd /home/box/ssl
+exec setuser box when-changed *.key *.crt -c "service nginx reload"

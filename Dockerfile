@@ -134,6 +134,19 @@ ADD stealthbox /opt/stealthbox
 
 ADD my_init.d/* /etc/my_init.d/
 
+# when-changed
+RUN pip install https://github.com/joh/when-changed/archive/master.zip
+
+RUN mkdir /etc/service/flexget-when-changed
+ADD services/flexget-when-changed.sh /etc/service/flexget-when-changed/run
+RUN chmod +x /etc/service/flexget-when-changed/run
+RUN ln -s /usr/bin/sv /etc/init.d/flexget-when-changed
+
+RUN mkdir /etc/service/ssl-when-changed
+ADD services/ssl-when-changed.sh /etc/service/ssl-when-changed/run
+RUN chmod +x /etc/service/ssl-when-changed/run
+RUN ln -s /usr/bin/sv /etc/init.d/ssl-when-changed
+
 # +---------+
 # | PREPARE |
 # +---------+
