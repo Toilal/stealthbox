@@ -128,6 +128,10 @@ RUN mv /etc/init.d/nginx /etc/init.d/nginx.lsb
 RUN chmod -x /etc/init.d/nginx.lsb
 RUN ln -s /usr/bin/sv /etc/init.d/nginx
 
+#stealthbox
+RUN mkdir -p /opt/stealthbox
+ADD stealthbox /opt/stealthbox
+
 # +---------+
 # | PREPARE |
 # +---------+
