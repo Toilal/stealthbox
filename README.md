@@ -11,14 +11,17 @@ sharing in the cloud and download content to your home.
 ## Install
 
 ```bash
-$docker run -d -p 8443:443 -p 8022:22 -p 6881:6881 --name stealthbox toilal/stealthbox
+docker run -d \
+  -p 8443:443 -p 8022:22 -p 6881:6881 \
+  --name stealthbox \
+  toilal/stealthbox
 ```
 
 ## Components
 
 - Change password for each component as soon as possible.
-- Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>` with
-ports used on `docker run`.
+- Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>`
+with ports used on `docker run`.
 
 ### [Pydio](https://pyd.io/)
 
@@ -34,7 +37,7 @@ username: box
 password: box12345
 ```
 
-#### [Deluge](http://deluge-torrent.org/)
+### [Deluge](http://deluge-torrent.org/)
 
 [Deluge](http://deluge-torrent.org/) is a lightweight, Free Software,
 cross-platform BitTorrent client.
@@ -87,3 +90,71 @@ server.
 configuration: /etc/nginx
 service: nginx
 ```
+
+## Configuration
+
+### Flexget
+
+Flexget is installed in [Daemon](http://flexget.com/wiki/Daemon) mode.
+
+Configuration file is `/home/box/flexget/config.yml`, and will be
+automatically reloaded in Daemon when changed.
+
+### Use your own SSL certificate
+
+Self-signed SSL certificate is generated when running the container for the
+first time. But self-signed certificates generates warning in browser when
+trying to connect.
+
+To avoid this warning, you can use a certificate from trusted authority, and load them in StealthBox. [StartSSL](https://www.startssl.com) can provide free trusted certificate.
+
+- Replacing certificate in container
+
+Your can use your own SSL certificate by replacing `stealthbox.key` and
+`stealthbox.crt` in `/home/box/ssl/`, using Pydio or SSH. This will reload
+web server automatically.
+
+- Using certificate from host
+
+Instead of replacing certificate files in container, you can also load volumes
+pointing to certificate on the host.
+
+```bash
+docker run -d \
+  -v /home/docker/ssl/stealthbox.key:/home/box/ssl/stealthbox.key:ro \
+  -v /home/docker/ssl/stealthbox.crt:/home/box/ssl/stealthbox.crt:ro \
+  -p 8443:443 -p 8022:22 -p 6881:6881 \
+  --name stealthbox \
+  toilal/stealthbox
+```
+
+Make sure correct access rights are defined.
+
+```bash
+chown 1000:1000 \
+  /home/docker/ssl/stealthbox.key \ 
+  /home/docker/ssl/stealthbox.crt
+
+chmod 400 /home/docker/ssl/stealthbox.crt
+```
+
+### Disable SSL
+
+You may have good reasons to do this, but nginx also listen on `tcp/80` for raw
+connections. So you can map this port instead of `tcp/443`.
+
+```bash
+docker run -d \
+  -p 8080:80 -p 8022:22 -p 6881:6881 \
+  --name stealthbox \
+  toilal/stealthbox
+```
+
+Web server will then be available at `http://<stealthbox>:8080`.
+
+### tcp/6881
+
+`tcp/6881` is the port use by Torrent protocol in deluge. Your have to map
+this port on the same host port.
+
+If you really need to change this port, you will have to edit deluge configuration for port to match, in web UI, or in `/home/box/.config/deluge/core.conf` (`listen_ports` parameter). You may also map a port range.

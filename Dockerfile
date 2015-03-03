@@ -118,6 +118,7 @@ RUN mkdir -p /home/box/nginx
 ADD nginx/* /etc/nginx/sites-available/
 RUN rm /etc/nginx/sites-enabled/default
 RUN ln -s /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
+RUN ln -s /etc/nginx/sites-available/proxy-ssl /etc/nginx/sites-enabled/proxy-ssl
 
 RUN sed -ri 's/^[;#]?(user\s*).*;/\1box;/' /etc/nginx/nginx.conf
 RUN sed -ri 's/^(proxy_set_header\s*Host\s*).*;/\1$http_host:$http_port;/' /etc/nginx/proxy_params
@@ -160,4 +161,4 @@ RUN rm -f /etc/service/sshd/down
 
 # Mount home volume and expose required ports
 VOLUME /home/box
-EXPOSE 443 22 6881 58846
+EXPOSE 443 22 80 6881 58846
