@@ -11,13 +11,13 @@ sharing in the cloud and download content to your home.
 ## Install
 
 ```bash
-docker run -d -it -p 8443:443 -p 8022:22 -p 6881:6881 --name stealthbox toilal/stealthbox
+$docker run -d -p 8443:443 -p 8022:22 -p 6881:6881 --name stealthbox toilal/stealthbox
 ```
 
 ## Components
 
 - Change password for each component as soon as possible.
-- Replace &lt;stealthbox&gt; with IP address of your server and &lt;8443&gt;/&lt;8022&gt; with
+- Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>` with
 ports used on `docker run`.
 
 ### [Pydio](https://pyd.io/)
@@ -28,9 +28,11 @@ interfaces (web / mobile / desktop), Pydio provides enterprise-grade features
 to gain back control and privacy of your data: user directory connectors,
 legacy filesystems drivers, comprehensive admin interface, and much more.
 
-> web: https://&lt;stealthbox&gt;:&lt;8443&gt;<br>
-> username: box<br>
-> password: box12345
+```
+web: https://<stealthbox>:<8443>
+username: box
+password: box12345
+```
 
 #### [Deluge](http://deluge-torrent.org/)
 
@@ -42,20 +44,24 @@ cross-platform BitTorrent client.
 - Plugin System
 - Much more ...
 
-> web: https://&lt;stealthbox&gt;:&lt;8443&gt;/deluge<br>
-> password: box12345
-> configuration: ~/.config/deluge
-> service: deluge
+```
+web: https://<stealthbox>:<8443>/deluge
+password: box12345
+configuration: ~/.config/deluge
+service: deluge
+```
 
 ### SSH/SCP/SFTP
 
 Access StealthBox through SSH/SCP/SFTP to bring content back to home and manage
 the environment.
 
-> ssh: ssh -p &lt;8022&gt; &lt;stealthbox&gt;<br>
-> username: box<br>
-> password: box12345<br>
-> service: sshd
+```
+ssh: ssh -p <8022> <stealthbox>
+username: box
+password: box12345
+service: sshd
+```
 
 ### [FlexGet](http://flexget.com/)
 
@@ -65,8 +71,10 @@ different kinds of sources like RSS-feeds, html pages, csv files, search
 engines and there are even plugins for sites that do not provide any kind of
 useful feeds.
 
-> configuration: ~/flexget<br>
-> service: flexget
+```
+configuration: ~/flexget
+service: flexget
+```
 
 ### Others
 
@@ -75,5 +83,7 @@ useful feeds.
 [nginx](http://nginx.org/en/) \[engine x\] is an HTTP and reverse proxy
 server.
 
-> configuration: /etc/nginx
-> service: nginx
+```
+configuration: /etc/nginx
+service: nginx
+```
