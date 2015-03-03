@@ -20,6 +20,7 @@ nbz, series, movies, etc.
 docker run -d \
   -p 8443:443 -p 8022:22 -p 6881:6881 \
   --name stealthbox \
+  --restart always \
   toilal/stealthbox
 ```
 
@@ -130,6 +131,7 @@ docker run -d \
   -v /home/docker/ssl/stealthbox.key:/home/box/ssl/stealthbox.key:ro \
   -v /home/docker/ssl/stealthbox.crt:/home/box/ssl/stealthbox.crt:ro \
   -p 8443:443 -p 8022:22 -p 6881:6881 \
+  --restart always \
   --name stealthbox \
   toilal/stealthbox
 ```
@@ -153,6 +155,7 @@ connections. So you can map this port instead of `tcp/443`.
 docker run -d \
   -p 8080:80 -p 8022:22 -p 6881:6881 \
   --name stealthbox \
+  --restart always \
   toilal/stealthbox
 ```
 
