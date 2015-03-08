@@ -104,7 +104,7 @@ RUN mkdir -p /home/box/couchpotato
 ADD couchpotato/* /home/box/couchpotato/
 
 # deluge
-ADD deluge/* /home/box/.config/deluge/
+ADD deluge/* /home/box/deluge/
 RUN mkdir -p /home/box/deluge/autoadd
 RUN mkdir -p /home/box/deluge/downloads
 RUN mkdir -p /home/box/deluge/tmp
