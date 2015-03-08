@@ -101,7 +101,6 @@ RUN ln -s /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
 RUN ln -s /etc/nginx/sites-available/proxy-ssl /etc/nginx/sites-enabled/proxy-ssl
 
 RUN sed -ri 's/^[;#]?(user\s*).*;/\1box;/' /etc/nginx/nginx.conf
-RUN sed -ri 's/^(proxy_set_header\s*Host\s*).*;/\1$http_host:$http_port;/' /etc/nginx/proxy_params
 
 #stealthbox
 RUN mkdir -p /opt/stealthbox

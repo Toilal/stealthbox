@@ -6,6 +6,11 @@ server {
   access_log /home/box/nginx/access.proxy.log;
   error_log /home/box/nginx/error.proxy.log;
 
+  # Increase proxy_headers memory size
+  # http://blog.tenyi.com/2014/05/use-nginx-as-reverse-proxy-to-serve.html
+  proxy_headers_hash_max_size 51200;
+  proxy_headers_hash_bucket_size 6400;
+
   location / {
     root /opt/pydio;
     index index.php;
