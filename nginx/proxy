@@ -72,7 +72,6 @@ server {
   location /deluge {
     proxy_pass http://localhost:8112/;
     proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-    proxy_redirect off;
     proxy_buffering off;
     include /etc/nginx/proxy_params;
     proxy_set_header        X-Deluge-Base   "/deluge/";
@@ -81,7 +80,6 @@ server {
   location /sickrage {
     proxy_pass http://localhost:8074;
     proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-    proxy_redirect off;
     proxy_buffering off;
     include /etc/nginx/proxy_params;
   }
@@ -89,7 +87,6 @@ server {
   location /couchpotato {
     proxy_pass http://localhost:5050;
     proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-    proxy_redirect off;
     proxy_buffering off;
     include /etc/nginx/proxy_params;
   }
