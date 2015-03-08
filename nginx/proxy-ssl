@@ -83,4 +83,12 @@ server {
     proxy_buffering off;
     include /etc/nginx/proxy_params;
   }
+
+  location /couchpotato {
+    proxy_pass http://localhost:5050;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_redirect off;
+    proxy_buffering off;
+    include /etc/nginx/proxy_params;
+  }
 }

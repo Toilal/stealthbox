@@ -1,0 +1,6 @@
+#!/bin/bash
+
+chmod 770 /etc/service/couchpotato/supervise
+chown box:box -R /etc/service/couchpotato/supervise
+
+exec setuser box python /opt/couchpotato/CouchPotato.py

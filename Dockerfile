@@ -26,7 +26,7 @@ RUN apt-get update -y
 # +---------+
 
 # tools
-RUN apt-get install -y wget
+RUN apt-get install -y wget git
 
 # php5-fpm
 RUN apt-get install -y php5 php5-fpm php5-gd php5-cli php5-mcrypt php5-sqlite
@@ -53,6 +53,11 @@ RUN apt-get install -y python-cheetah
 RUN mkdir -p /opt/sickrage
 RUN wget -qO- https://github.com/SiCKRAGETV/SickRage/archive/v4.0.9.tar.gz \
     | tar xvz --strip-components=1 -C /opt/sickrage
+
+# CouchPotato
+RUN mkdir -p /opt/couchpotato
+RUN wget -qO- https://github.com/RuudBurger/CouchPotatoServer/archive/build/2.6.3.tar.gz \
+    | tar xvz --strip-components=1 -C /opt/couchpotato
 
 # stealthbox
 ADD stealthbox /opt/
@@ -96,6 +101,11 @@ ADD pydio/cache/* /home/box/pydio/cache/
 RUN mkdir -p /home/box/sickrage
 RUN mkdir -p /home/box/sickrage/data
 ADD sickrage/* /home/box/sickrage/
+
+# CouchPotato
+RUN mkdir -p /home/box/couchpotato
+RUN mkdir -p /home/box/.couchpotato
+ADD couchpotato/* /home/box/.couchpotato/
 
 # deluge
 ADD deluge/* /home/box/.config/deluge/

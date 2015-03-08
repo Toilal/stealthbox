@@ -10,10 +10,11 @@ sharing in the cloud and download content to your home:
 
 - [Deluge](http://deluge-torrent.org/), a BitTorrent client with Web User
 Interface.
-- [Pydio](https://pyd.io/), a web application to view, edit and download files.
 - [SickRage](http://sickrage.tv), searches TheTVDB and TVRage for shows.
+- [CouchPotato](http://sickrage.tv), download movies automatically.
 - [FlexGet](http://flexget.com/), a multipurpose automation tool for torrent,
 nbz, series, movies, etc.
+- [Pydio](https://pyd.io/), a web application to view, edit and download files.
 
 ## Install
 
@@ -45,18 +46,6 @@ username: box
 password: box12345
 ```
 
-### [SickRage](https://sickrage.tv/)
-
-[SickRage](https://sickrage.tv/) is a Video File Manager for TV Shows, It
-watches for new episodes of your favorite shows and when they are posted it
-does its magic.
-
-```
-web: https://<stealthbox>:<8443>/sickrage
-username: box
-password: box12345
-```
-
 ### [Deluge](http://deluge-torrent.org/)
 
 [Deluge](http://deluge-torrent.org/) is a lightweight, Free Software,
@@ -74,15 +63,27 @@ configuration: ~/.config/deluge
 service: deluge
 ```
 
-### SSH/SCP/SFTP
+### [SickRage](https://sickrage.tv/)
 
-Access StealthBox through SSH/SCP/SFTP to bring content back to home and manage
-the environment.
+[SickRage](https://sickrage.tv/) is a Video File Manager for TV Shows, It
+watches for new episodes of your favorite shows and when they are posted it
+does its magic.
 
 ```
-ssh: ssh -p <8022> box@<stealthbox>
+web: https://<stealthbox>:<8443>/sickrage
+username: box
 password: box12345
-service: sshd
+```
+
+### [CouchPotato](https://couchpota.to/)
+
+[CouchPotato](https://couchpota.to/) Download movies automatically, easily and
+in the best quality as soon as they are available. Awesome PVR for usenet and torrents. Just fill in what you want to see and CouchPotato will add it to your "want to watch"-list.
+
+```
+web: https://<stealthbox>:<8443>/couchpotato
+username: box
+password: box12345
 ```
 
 ### [FlexGet](http://flexget.com/)
@@ -99,6 +100,17 @@ service: flexget
 ```
 
 ### Others
+
+#### SSH/SCP/SFTP
+
+Access StealthBox through SSH/SCP/SFTP to bring content back to home and manage
+the environment.
+
+```
+ssh: ssh -p <8022> box@<stealthbox>
+password: box12345
+service: sshd
+```
 
 #### [nginx](http://nginx.org/en/)
 
