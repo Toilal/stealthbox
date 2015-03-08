@@ -59,6 +59,11 @@ RUN mkdir -p /opt/couchpotato
 RUN wget -qO- https://github.com/RuudBurger/CouchPotatoServer/archive/build/2.6.3.tar.gz \
     | tar xvz --strip-components=1 -C /opt/couchpotato
 
+# HeadPhones
+RUN mkdir -p /opt/headphones
+RUN wget -qO- https://github.com/rembo10/headphones/archive/v0.5.4.tar.gz \
+    | tar xvz --strip-components=1 -C /opt/headphones
+
 # +-----------+
 # | CONFIGURE |
 # +-----------+
@@ -102,6 +107,10 @@ ADD sickrage/* /home/box/sickrage/
 # CouchPotato
 RUN mkdir -p /home/box/couchpotato
 ADD couchpotato/* /home/box/couchpotato/
+
+# HeadPhones
+RUN mkdir -p /home/box/headphones
+ADD headphones/* /home/box/headphones/
 
 # deluge
 ADD deluge/* /home/box/deluge/

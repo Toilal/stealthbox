@@ -8,12 +8,12 @@ on any linux server without polluting it.
 It embeds several applications that are configured together to automate file 
 sharing in the cloud and download content to your home: 
 
-- [Deluge](http://deluge-torrent.org/), a BitTorrent client with Web User
-Interface.
-- [SickRage](http://sickrage.tv), searches TheTVDB and TVRage for shows.
-- [CouchPotato](http://sickrage.tv), download movies automatically.
-- [FlexGet](http://flexget.com/), a multipurpose automation tool for torrent,
-nbz, series, movies, etc.
+- [Deluge](http://deluge-torrent.org/), a BitTorrent client.
+- [SickRage](http://sickrage.tv), an automatic shows downloader.
+- [CouchPotato](http://sickrage.tv), an automatic movies downloader.
+- [HeadPhones](https://github.com/rembo10/headphones), an automated music
+downloader.
+- [FlexGet](http://flexget.com/), a multipurpose automation tool
 - [Pydio](https://pyd.io/), a web application to view, edit and download files.
 
 ## Install
@@ -78,7 +78,21 @@ password: box12345
 ### [CouchPotato](https://couchpota.to/)
 
 [CouchPotato](https://couchpota.to/) Download movies automatically, easily and
-in the best quality as soon as they are available. Awesome PVR for usenet and torrents. Just fill in what you want to see and CouchPotato will add it to your "want to watch"-list.
+in the best quality as soon as they are available. Awesome PVR for usenet and
+torrents. Just fill in what you want to see and CouchPotato will add it to
+your "want to watch"-list.
+
+```
+web: https://<stealthbox>:<8443>/couchpotato
+username: box
+password: box12345
+```
+
+### [HeadPhones](https://github.com/rembo10/headphones)
+
+[HeadPhones](https://github.com/rembo10/headphones) is an automated music
+downloader for NZB and Torrent, written in Python. It supports SABnzbd,
+NZBget, Transmission, µTorrent and Blackhole.
 
 ```
 web: https://<stealthbox>:<8443>/couchpotato
@@ -137,7 +151,9 @@ Self-signed SSL certificate is generated when running the container for the
 first time. But self-signed certificates generates warning in browser when
 trying to connect.
 
-To avoid this warning, you can use a certificate from trusted authority, and load them in StealthBox. [StartSSL](https://www.startssl.com) can provide free trusted certificate.
+To avoid this warning, you can use a certificate from trusted authority, and
+load them in StealthBox. [StartSSL](https://www.startssl.com) can provide free
+trusted certificate.
 
 - Replacing certificate in container
 

@@ -88,4 +88,14 @@ server {
     proxy_buffering off;
     include /etc/nginx/proxy_params;
   }
+
+  location /headphones {
+    proxy_pass http://localhost:8181;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+    proxy_buffering off;
+    proxy_redirect http:// $scheme://;
+    include /etc/nginx/proxy_params;
+    proxy_set_header Authorization $http_authorization;
+    proxy_pass_header  Authorization;
+  }
 }
