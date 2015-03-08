@@ -67,8 +67,7 @@ Access StealthBox through SSH/SCP/SFTP to bring content back to home and manage
 the environment.
 
 ```
-ssh: ssh -p <8022> <stealthbox>
-username: box
+ssh: ssh -p <8022> box@<stealthbox>
 password: box12345
 service: sshd
 ```
