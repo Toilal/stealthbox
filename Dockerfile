@@ -44,8 +44,12 @@ RUN pip install flexget
 RUN pip install six --upgrade # python-six is 1.5.2 but flexget requires >= 1.7
 
 # pydio
-RUN wget http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-channel/6.0.3/pydio-core-6.0.3.tar.gz -O /tmp/pydio-core.tar.gz
-RUN tar zxvf /tmp/pydio-core.tar.gz -C /opt
+RUN mkdir -p /opt/pydio
+RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-channel/6.0.5/pydio-core-6.0.5.tar.gz \
+    | tar xvz --strip-components=1 -C /opt/pydio
+
+# stealthbox
+ADD stealthbox /opt/
 
 # +-----------+
 # | CONFIGURE |
@@ -68,28 +72,15 @@ RUN sed -ri 's/^[;#]?(group\s*=\s*).*/\1box/' /etc/php5/fpm/pool.d/www.conf
 RUN sed -ri 's/^[;#]?(listen.owner\s*=\s*).*/\1box/' /etc/php5/fpm/pool.d/www.conf
 RUN sed -ri 's/^[;#]?(listen.group\s*=\s*).*/\1box/' /etc/php5/fpm/pool.d/www.conf
 
-RUN mkdir /etc/service/php5-fpm
-ADD services/php5-fpm.sh /etc/service/php5-fpm/run
-RUN chmod +x /etc/service/php5-fpm/run
-RUN mv /etc/init.d/php5-fpm /etc/init.d/php5-fpm.lsb
-RUN chmod -x /etc/init.d/php5-fpm.lsb
-RUN ln -s /usr/bin/sv /etc/init.d/php5-fpm
-
 #flexget
 RUN mkdir -p /home/box/flexget
 ADD flexget/* /home/box/flexget/
 
-RUN mkdir /etc/service/flexget
-ADD services/flexget.sh /etc/service/flexget/run
-RUN chmod +x /etc/service/flexget/run
-RUN ln -s /usr/bin/sv /etc/init.d/flexget
 # TODO: Create flexget access in deluge auth file for deluge plugin
 
 # pydio
-RUN ln -s /opt/pydio-core-6.0.3 /opt/pydio
-
-RUN sed -ri 's/^(define\("AJXP_DATA_PATH",\s*).*(\);)/\1"\/home\/box\/pydio"\2/' /opt/pydio-core-6.0.3/conf/bootstrap_context.php
-RUN mv /opt/pydio-core-6.0.3/data /home/box/pydio
+RUN sed -ri 's/^(define\("AJXP_DATA_PATH",\s*).*(\);)/\1"\/home\/box\/pydio"\2/' /opt/pydio/conf/bootstrap_context.php
+RUN mv /opt/pydio/data /home/box/pydio
 
 ADD pydio/bootstrap.json /home/box/pydio/plugins/boot.conf/
 ADD pydio/pydio.db /home/box/pydio/plugins/conf.sql/
@@ -102,16 +93,6 @@ RUN mkdir -p /home/box/deluge/downloads
 RUN mkdir -p /home/box/deluge/tmp
 RUN mkdir -p /home/box/deluge/torrents
 
-RUN mkdir /etc/service/deluged
-ADD services/deluged.sh /etc/service/deluged/run
-RUN chmod +x /etc/service/deluged/run
-RUN ln -s /usr/bin/sv /etc/init.d/deluged
-
-RUN mkdir /etc/service/deluge-web
-ADD services/deluge-web.sh /etc/service/deluge-web/run
-RUN chmod +x /etc/service/deluge-web/run
-RUN ln -s /usr/bin/sv /etc/init.d/deluge-web
-
 # nginx
 RUN mkdir -p /home/box/nginx
 ADD nginx/* /etc/nginx/sites-available/
@@ -121,31 +102,22 @@ RUN ln -s /etc/nginx/sites-available/proxy-ssl /etc/nginx/sites-enabled/proxy-ss
 
 RUN sed -ri 's/^[;#]?(user\s*).*;/\1box;/' /etc/nginx/nginx.conf
 RUN sed -ri 's/^(proxy_set_header\s*Host\s*).*;/\1$http_host:$http_port;/' /etc/nginx/proxy_params
-RUN mkdir /etc/service/nginx
-ADD services/nginx.sh /etc/service/nginx/run
-RUN chmod +x /etc/service/nginx/run
-RUN mv /etc/init.d/nginx /etc/init.d/nginx.lsb
-RUN chmod -x /etc/init.d/nginx.lsb
-RUN ln -s /usr/bin/sv /etc/init.d/nginx
 
 #stealthbox
 RUN mkdir -p /opt/stealthbox
 ADD stealthbox /opt/stealthbox
 
-ADD my_init.d/* /etc/my_init.d/
-
 # when-changed
 RUN pip install https://github.com/joh/when-changed/archive/master.zip
 
-RUN mkdir /etc/service/flexget-when-changed
-ADD services/flexget-when-changed.sh /etc/service/flexget-when-changed/run
-RUN chmod +x /etc/service/flexget-when-changed/run
-RUN ln -s /usr/bin/sv /etc/init.d/flexget-when-changed
+# Add my_init
+ADD my_init.d/* /etc/my_init.d/
 
-RUN mkdir /etc/service/ssl-when-changed
-ADD services/ssl-when-changed.sh /etc/service/ssl-when-changed/run
-RUN chmod +x /etc/service/ssl-when-changed/run
-RUN ln -s /usr/bin/sv /etc/init.d/ssl-when-changed
+# Add services
+ADD services/ /etc/service/
+RUN mkdir -p /home/box/logs
+RUN /opt/stealthbox/lsb_compat.sh
+RUN /opt/stealthbox/runit_logs.sh
 
 # +---------+
 # | PREPARE |
