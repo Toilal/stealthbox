@@ -104,8 +104,7 @@ ADD sickrage/* /home/box/sickrage/
 
 # CouchPotato
 RUN mkdir -p /home/box/couchpotato
-RUN mkdir -p /home/box/.couchpotato
-ADD couchpotato/* /home/box/.couchpotato/
+ADD couchpotato/* /home/box/couchpotato/
 
 # deluge
 ADD deluge/* /home/box/.config/deluge/
