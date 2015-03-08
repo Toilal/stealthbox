@@ -59,9 +59,6 @@ RUN mkdir -p /opt/couchpotato
 RUN wget -qO- https://github.com/RuudBurger/CouchPotatoServer/archive/build/2.6.3.tar.gz \
     | tar xvz --strip-components=1 -C /opt/couchpotato
 
-# stealthbox
-ADD stealthbox /opt/
-
 # +-----------+
 # | CONFIGURE |
 # +-----------+
@@ -124,7 +121,7 @@ RUN sed -ri 's/^[;#]?(user\s*).*;/\1box;/' /etc/nginx/nginx.conf
 
 #stealthbox
 RUN mkdir -p /opt/stealthbox
-ADD stealthbox /opt/stealthbox
+ADD stealthbox/* /opt/stealthbox/
 
 # when-changed
 RUN pip install https://github.com/joh/when-changed/archive/master.zip
