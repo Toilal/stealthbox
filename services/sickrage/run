@@ -1,0 +1,7 @@
+#!/bin/bash
+
+chmod 770 /etc/service/sickrage/supervise
+chown box:box -R /etc/service/sickrage/supervise
+
+cd /home/box/sickrage
+exec setuser box /opt/sickrage/SickBeard.py --datadir=/home/box/sickrage --nolaunch

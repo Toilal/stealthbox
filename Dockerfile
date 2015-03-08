@@ -48,6 +48,12 @@ RUN mkdir -p /opt/pydio
 RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-channel/6.0.5/pydio-core-6.0.5.tar.gz \
     | tar xvz --strip-components=1 -C /opt/pydio
 
+# SickRage
+RUN apt-get install -y python-cheetah
+RUN mkdir -p /opt/sickrage
+RUN wget -qO- https://github.com/SiCKRAGETV/SickRage/archive/v4.0.9.tar.gz \
+    | tar xvz --strip-components=1 -C /opt/sickrage
+
 # stealthbox
 ADD stealthbox /opt/
 
@@ -85,6 +91,11 @@ RUN mv /opt/pydio/data /home/box/pydio
 ADD pydio/bootstrap.json /home/box/pydio/plugins/boot.conf/
 ADD pydio/pydio.db /home/box/pydio/plugins/conf.sql/
 ADD pydio/cache/* /home/box/pydio/cache/
+
+# SickRage
+RUN mkdir -p /home/box/sickrage
+RUN mkdir -p /home/box/sickrage/data
+ADD sickrage/* /home/box/sickrage/
 
 # deluge
 ADD deluge/* /home/box/.config/deluge/

@@ -11,6 +11,7 @@ sharing in the cloud and download content to your home:
 - [Deluge](http://deluge-torrent.org/), a BitTorrent client with Web User
 Interface.
 - [Pydio](https://pyd.io/), a web application to view, edit and download files.
+- [SickRage](http://sickrage.tv), searches TheTVDB and TVRage for shows.
 - [FlexGet](http://flexget.com/), a multipurpose automation tool for torrent,
 nbz, series, movies, etc.
 
@@ -40,6 +41,18 @@ legacy filesystems drivers, comprehensive admin interface, and much more.
 
 ```
 web: https://<stealthbox>:<8443>
+username: box
+password: box12345
+```
+
+### [SickRage](https://sickrage.tv/)
+
+[SickRage](https://sickrage.tv/) is a Video File Manager for TV Shows, It
+watches for new episodes of your favorite shows and when they are posted it
+does its magic.
+
+```
+web: https://<stealthbox>:<8443>/sickrage
 username: box
 password: box12345
 ```
