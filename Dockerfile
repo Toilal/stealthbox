@@ -51,18 +51,15 @@ RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-chan
 # SickRage
 RUN apt-get install -y python-cheetah
 RUN mkdir -p /opt/sickrage
-RUN wget -qO- https://github.com/SiCKRAGETV/SickRage/archive/v4.0.9.tar.gz \
-    | tar xvz --strip-components=1 -C /opt/sickrage
+RUN git clone https://github.com/SiCKRAGETV/SickRage.git /opt/sickrage
 
 # CouchPotato
 RUN mkdir -p /opt/couchpotato
-RUN wget -qO- https://github.com/RuudBurger/CouchPotatoServer/archive/build/2.6.3.tar.gz \
-    | tar xvz --strip-components=1 -C /opt/couchpotato
+RUN git clone https://github.com/RuudBurger/CouchPotatoServer.git /opt/couchpotato
 
 # HeadPhones
 RUN mkdir -p /opt/headphones
-RUN wget -qO- https://github.com/rembo10/headphones/archive/v0.5.4.tar.gz \
-    | tar xvz --strip-components=1 -C /opt/headphones
+RUN git clone https://github.com/rembo10/headphones /opt/headphones
 
 # +-----------+
 # | CONFIGURE |
@@ -111,7 +108,7 @@ ADD couchpotato/* /home/box/couchpotato/
 # 3rd party providers for CouchPotato
 # https://couchpota.to/forum/viewtopic.php?f=17&t=1428&p=6115
 RUN mkdir -p /home/box/couchpotato/custom_plugins
-RUN git clone https://github.com/djoole/couchpotato.provider.t411 /home/box/couchpotato/custom_plugins/t411
+RUN git clone https://github.com/Toilal/couchpotato.provider.t411 /home/box/couchpotato/custom_plugins/t411
 
 # HeadPhones
 RUN mkdir -p /home/box/headphones
@@ -162,4 +159,4 @@ RUN rm -f /etc/service/sshd/down
 
 # Mount home volume and expose required ports
 VOLUME /home/box
-EXPOSE 443 22 80 6881 58846
+EXPOSE 443 80 22 6881 58846
