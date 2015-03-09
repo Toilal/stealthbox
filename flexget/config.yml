@@ -5,4 +5,4 @@ schedules:
 
 tasks:
   sample:
-    rss: http://example.com
+    rss: http://localhost:9999
