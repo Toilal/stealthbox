@@ -40,15 +40,14 @@ docker logs stealthbox | grep Password:
 To set your own password when running the container, add `-e PASSWORD=`
 followed with the password of your choice to `docker run` command.
 
-You can also change the password using 'boxpasswd' command from shell.
+You can also change the password using `boxpasswd` command from shell.
 
 Password must be long and strong enough to be accepted (checked with 
 [cracklib-check](http://sourceforge.net/projects/cracklib)).
 
 ## Components
 
-- Change password for each component as soon as container is running.
-- Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>`
+Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>`
 with ports used in `docker run` command.
 
 ### [Pydio](https://pyd.io/)
