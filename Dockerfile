@@ -159,4 +159,4 @@ RUN rm -f /etc/service/sshd/down
 
 # Mount home volume and expose required ports
 VOLUME /home/box
-EXPOSE 443 80 22 6881 58846
+EXPOSE 443 80 22 6881
