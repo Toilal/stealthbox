@@ -26,6 +26,25 @@ docker run -d \
   toilal/stealthbox
 ```
 
+## Username & Password
+
+All services are installed with a `box` username and a randomly generated
+password. This password is displayed when container is starting. 
+
+To retrieve, you can use `docker logs`:
+
+```
+docker logs stealthbox | grep Password:
+```
+
+To set your own password when running the container, add `-e PASSWORD=`
+followed with the password of your choice to `docker run` command.
+
+You can also change the password using 'boxpasswd' command from shell.
+
+Password must be long and strong enough to be accepted (checked with 
+[cracklib-check](http://sourceforge.net/projects/cracklib)).
+
 ## Components
 
 - Change password for each component as soon as container is running.
@@ -42,8 +61,6 @@ legacy filesystems drivers, comprehensive admin interface, and much more.
 
 ```
 web: https://<stealthbox>:<8443>
-username: box
-password: box12345
 ```
 
 ### [Deluge](http://deluge-torrent.org/)
@@ -58,7 +75,6 @@ cross-platform BitTorrent client.
 
 ```
 web: https://<stealthbox>:<8443>/deluge
-password: box12345
 configuration: ~/.config/deluge
 service: deluge
 ```
@@ -71,8 +87,6 @@ does its magic.
 
 ```
 web: https://<stealthbox>:<8443>/sickrage
-username: box
-password: box12345
 ```
 
 ### [CouchPotato](https://couchpota.to/)
@@ -84,8 +98,6 @@ your "want to watch"-list.
 
 ```
 web: https://<stealthbox>:<8443>/couchpotato
-username: box
-password: box12345
 ```
 
 ### [HeadPhones](https://github.com/rembo10/headphones)
@@ -96,8 +108,6 @@ NZBget, Transmission, µTorrent and Blackhole.
 
 ```
 web: https://<stealthbox>:<8443>/couchpotato
-username: box
-password: box12345
 ```
 
 ### [FlexGet](http://flexget.com/)
@@ -122,7 +132,6 @@ the environment.
 
 ```
 ssh: ssh -p <8022> box@<stealthbox>
-password: box12345
 service: sshd
 ```
 

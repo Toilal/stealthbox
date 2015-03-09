@@ -15,7 +15,7 @@
 DOMAIN="stealthbox"
 
 if [[ ! -f /home/box/ssl/$DOMAIN.key || ! -f /home/box/ssl/$DOMAIN.crt ]]; then
-  echo "SSL Certificates missing from /home/box/ssl. Creating them ..."
+  echo "*** SSL Certificates missing from /home/box/ssl. Creating them ..."
 
   mkdir -p /home/box/ssl
   cd /home/box/ssl

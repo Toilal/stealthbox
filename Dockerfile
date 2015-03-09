@@ -26,7 +26,7 @@ RUN apt-get update -y
 # +---------+
 
 # tools
-RUN apt-get install -y wget git
+RUN apt-get install -y wget git sqlite3 pwgen libcrack2 expect
 
 # php5-fpm
 RUN apt-get install -y php5 php5-fpm php5-gd php5-cli php5-mcrypt php5-sqlite
@@ -65,7 +65,7 @@ RUN git clone https://github.com/rembo10/headphones /opt/headphones
 # | CONFIGURE |
 # +-----------+
 
-RUN adduser --disabled-password --gecos "" box
+RUN useradd -ms /bin/bash box
 RUN echo 'box:box12345' | chpasswd
 
 # php5-fpm
@@ -131,8 +131,9 @@ RUN ln -s /etc/nginx/sites-available/proxy-ssl /etc/nginx/sites-enabled/proxy-ss
 RUN sed -ri 's/^[;#]?(user\s*).*;/\1box;/' /etc/nginx/nginx.conf
 
 #stealthbox
-RUN mkdir -p /opt/stealthbox
-ADD stealthbox/* /opt/stealthbox/
+ADD stealthbox /opt/stealthbox/
+
+RUN ln -s /opt/stealthbox/boxpasswd.sh /usr/bin/boxpasswd
 
 # when-changed
 RUN pip install https://github.com/joh/when-changed/archive/master.zip
@@ -143,8 +144,8 @@ ADD my_init.d/* /etc/my_init.d/
 # Add services
 ADD services/ /etc/service/
 RUN mkdir -p /home/box/logs
-RUN /opt/stealthbox/lsb_compat.sh
-RUN /opt/stealthbox/runit_logs.sh
+RUN /opt/stealthbox/docker/lsb_compat.sh
+RUN /opt/stealthbox/docker/runit_logs.sh
 
 # +---------+
 # | PREPARE |
