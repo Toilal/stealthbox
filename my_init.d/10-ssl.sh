@@ -38,7 +38,7 @@ if [[ ! -f /home/box/ssl/$DOMAIN.key || ! -f /home/box/ssl/$DOMAIN.crt ]]; then
   export PASSPHRASE=$(head -c 500 /dev/urandom | tr -dc a-z0-9A-Z | head -c 128; echo)
 
   # Certificate details; replace items in angle brackets with your own info
-  subj="/C=FR/ST=France/L=Paris/O=stealth-box/OU=stealth-box/CN=*.stealth-box.com"
+  subj="/O=stealth-box"
 
   echo subj
 
