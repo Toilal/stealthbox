@@ -86,8 +86,6 @@ RUN sed -ri 's/^[;#]?(listen.group\s*=\s*).*/\1box/' /etc/php5/fpm/pool.d/www.co
 RUN mkdir -p /home/box/flexget
 ADD flexget/* /home/box/flexget/
 
-# TODO: Create flexget access in deluge auth file for deluge plugin
-
 # pydio
 RUN sed -ri 's/^(define\("AJXP_DATA_PATH",\s*).*(\);)/\1"\/home\/box\/pydio"\2/' /opt/pydio/conf/bootstrap_context.php
 RUN mv /opt/pydio/data /home/box/pydio
@@ -125,12 +123,11 @@ RUN mkdir -p /home/box/deluge/torrents
 RUN mkdir -p /home/box/nginx
 ADD nginx/* /etc/nginx/sites-available/
 RUN rm /etc/nginx/sites-enabled/default
-RUN ln -s /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
-RUN ln -s /etc/nginx/sites-available/proxy-ssl /etc/nginx/sites-enabled/proxy-ssl
+RUN ln -s /etc/nginx/sites-available/stealthbox /etc/nginx/sites-enabled/stealthbox
 
 RUN sed -ri 's/^[;#]?(user\s*).*;/\1box;/' /etc/nginx/nginx.conf
 
-#stealthbox
+# stealthbox
 ADD stealthbox /opt/stealthbox/
 
 RUN ln -s /opt/stealthbox/boxpasswd.sh /usr/bin/boxpasswd
@@ -160,4 +157,6 @@ RUN rm -f /etc/service/sshd/down
 
 # Mount home volume and expose required ports
 VOLUME /home/box
+VOLUME /etc/stealthbox/ssl
+
 EXPOSE 443 80 22 6881

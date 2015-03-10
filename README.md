@@ -160,8 +160,8 @@ Instead of replacing certificate files in container, you can also load volumes p
 
 ```bash
 docker run -d \
-  -v /home/docker/ssl/stealthbox.key:/home/box/ssl/stealthbox.key:ro \
-  -v /home/docker/ssl/stealthbox.crt:/home/box/ssl/stealthbox.crt:ro \
+  -v /home/docker/ssl/stealthbox.key:/etc/stealthbox/ssl/stealthbox.key:ro \
+  -v /home/docker/ssl/stealthbox.crt:/etc/stealthbox/ssl/stealthbox.crt:ro \
   -p 8443:443 -p 8022:22 -p 6881:6881 \
   --restart always \
   --name stealthbox \
@@ -175,7 +175,7 @@ chown 1000:1000 \
   /home/docker/ssl/stealthbox.key \ 
   /home/docker/ssl/stealthbox.crt
 
-chmod 400 /home/docker/ssl/stealthbox.crt
+chmod 400 /home/docker/ssl/stealthbox.key
 ```
 
 ### Disable SSL

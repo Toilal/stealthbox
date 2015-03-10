@@ -14,13 +14,13 @@
 
 DOMAIN="stealthbox"
 
-if [[ ! -f /home/box/ssl/$DOMAIN.key || ! -f /home/box/ssl/$DOMAIN.crt ]]; then
-  echo "*** SSL Certificates missing from /home/box/ssl. Creating them ..."
+if [[ ! -f /etc/stealthbox/ssl/$DOMAIN.key || ! -f /etc/stealthbox/ssl/$DOMAIN.crt ]]; then
+  echo "*** SSL Certificates missing from /etc/stealthbox/ssl. Creating them ..."
 
-  mkdir -p /home/box/ssl
-  cd /home/box/ssl
+  mkdir -p /etc/stealthbox/ssl
+  cd /etc/stealthbox/ssl
 
-  rm -f /home/box/ssl/$DOMAIN.*
+  rm -f /etc/stealthbox/ssl/$DOMAIN.*
 
   if [ -z "$DOMAIN" ]; then
     echo "Usage: $(basename $0) <domain>"
@@ -64,7 +64,7 @@ if [[ ! -f /home/box/ssl/$DOMAIN.key || ! -f /home/box/ssl/$DOMAIN.crt ]]; then
   openssl x509 -req -days 3650 -in $DOMAIN.csr -signkey $DOMAIN.key -out $DOMAIN.crt
   fail_if_error $?
 
-  chmod 400 /home/box/ssl/$DOMAIN.key
+  chmod 400 /etc/stealthbox/ssl/$DOMAIN.key
 else
-  echo "SSL Certificate are available in /home/box/ssl."
+  echo "SSL Certificate are available in /etc/stealthbox/ssl."
 fi
