@@ -10,3 +10,6 @@ echo "Password: $password"
 echo -e
 echo "You can change the password using 'boxpasswd' command from shell"
 echo -e
+
+# Clear PASSWORD environment variable
+rm /etc/container_environment/PASSWORD
