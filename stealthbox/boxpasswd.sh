@@ -41,6 +41,10 @@ else
 fi
 
 # Deluge
+deluge_status=$(sv status deluge | cut -d ':' -f1)
+deluge_web_status=$(sv status deluge-web | cut -d ':' -f1)
+if [ "$deluge_status" == "run" ]; then sv stop deluge; fi;
+if [ "$deluge_web_status" == "run" ]; then sv stop deluge-web; fi;
 
 sed -ri "s/^(box:).*(:.*?)/\1$PASSWORD\2/" /home/box/deluge/auth
 
@@ -51,16 +55,34 @@ deluge_salt=$(echo $deluge | cut -d ':' -f 2)
 sed -ri "s/(\"pwd_sha1\":).*?(,)/\1 \"$deluge_sha1\"\2/" /home/box/deluge/web.conf
 sed -ri "s/(\"pwd_salt\":).*?(,)/\1 \"$deluge_salt\"\2/" /home/box/deluge/web.conf
 
+if [ "$deluge_status" == "run" ]; then sv start deluge; fi;
+if [ "$deluge_web_status" == "run" ]; then sv start deluge-web; fi;
+
 # CouchPotato
+couchpotato_status=$(sv status couchpotato | cut -d ':' -f1)
+if [ "$couchpotato_status" == "run" ]; then sv stop couchpotato; fi;
+
 couchpotato_md5=$(echo -n $PASSWORD| md5sum | cut -d ' ' -f 1)
 sed -ri "s/^(password\s*=\s*).*/\1$couchpotato_md5/" /home/box/couchpotato/settings.conf
 
+if [ "$couchpotato_status" == "run" ]; then sv start couchpotato; fi;
+
 # SickRage
+sickrage_status=$(sv status sickrage | cut -d ':' -f1)
+if [ "$sickrage_status" == "run" ]; then sv stop sickrage; fi;
+
 sed -ri "s/^(web_password\s*=\s*).*/\1$PASSWORD/" /home/box/sickrage/config.ini
 sed -ri "s/^(torrent_password\s*=\s*).*/\1$PASSWORD/" /home/box/sickrage/config.ini
 
+if [ "$sickrage_status" == "run" ]; then sv start sickrage; fi;
+
 # HeadPhones
+headphones_status=$(sv status headphones | cut -d ':' -f1)
+if [ "$headphones_status" == "run" ]; then sv stop headphones; fi;
+
 sed -ri "s/^(http_password\s*=\s*).*/\1$PASSWORD/" /home/box/headphones/config.ini
+
+if [ "$headphones_status" == "run" ]; then sv start headphones; fi;
 
 # Pydio
 pydio_hash=$(php -f $DIR/passwd/passwd.pydio.php "password=$PASSWORD")
