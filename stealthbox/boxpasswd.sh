@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -33,7 +34,7 @@ fi
 echo "Changing password..."
 
 if [ -f /home/box/.boxpasswd ]; then
-	OLD_PASSWORD=$(echo -n /home/box/.boxpasswd)
+	OLD_PASSWORD=$(cat /home/box/.boxpasswd)
 	$DIR/passwd/autopasswd.sh "$OLD_PASSWORD" "$PASSWORD"
 else
 	$DIR/passwd/autopasswd.sh "box12345" "$PASSWORD"
@@ -66,7 +67,10 @@ pydio_hash=$(php -f $DIR/passwd/passwd.pydio.php "password=$PASSWORD")
 sqlite3 /home/box/pydio/plugins/conf.sql/pydio.db "UPDATE ajxp_users SET password='$pydio_hash' WHERE login='box'"
 
 # Store new password
-echo $PASSWORD>/home/box/.boxpasswd
+if [ -f /home/box/.boxpasswd ]; then
+	chmod 600 /home/box/.boxpasswd
+fi
+echo -n $PASSWORD>/home/box/.boxpasswd
 chmod 400 /home/box/.boxpasswd
 
 echo "Password changed!"
