@@ -2,5 +2,6 @@
 
 chmod 770 /etc/service/deluge/supervise
 chown box:box -R /etc/service/deluge/supervise
+chown box:box -R /etc/service/deluge/log
 
 exec setuser box deluged -c /home/box/deluge -d -L info -p 58846

@@ -2,6 +2,7 @@
 
 chmod 770 /etc/service/deluge-web/supervise
 chown box:box -R /etc/service/deluge-web/supervise
+chown box:box -R /etc/service/deluge-web/log
 
 sv start deluge || exit 1
 

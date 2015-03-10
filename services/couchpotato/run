@@ -2,5 +2,6 @@
 
 chmod 770 /etc/service/couchpotato/supervise
 chown box:box -R /etc/service/couchpotato/supervise
+chown box:box -R /etc/service/couchpotato/log
 
 exec setuser box python /opt/couchpotato/CouchPotato.py --data_dir /home/box/couchpotato
