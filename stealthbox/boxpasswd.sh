@@ -40,6 +40,13 @@ else
 	$DIR/passwd/autopasswd.sh "box12345" "$PASSWORD"
 fi
 
+# Store new password
+if [ -f /home/box/.boxpasswd ]; then
+	chmod 600 /home/box/.boxpasswd
+fi
+echo -n $PASSWORD>/home/box/.boxpasswd
+chmod 400 /home/box/.boxpasswd
+
 # Deluge
 deluge_status=$(sv status deluge | cut -d ':' -f1)
 deluge_web_status=$(sv status deluge-web | cut -d ':' -f1)
@@ -87,12 +94,5 @@ if [ "$headphones_status" == "run" ]; then sv start headphones; fi;
 # Pydio
 pydio_hash=$(php -f $DIR/passwd/passwd.pydio.php "password=$PASSWORD")
 sqlite3 /home/box/pydio/plugins/conf.sql/pydio.db "UPDATE ajxp_users SET password='$pydio_hash' WHERE login='box'"
-
-# Store new password
-if [ -f /home/box/.boxpasswd ]; then
-	chmod 600 /home/box/.boxpasswd
-fi
-echo -n $PASSWORD>/home/box/.boxpasswd
-chmod 400 /home/box/.boxpasswd
 
 echo "Password changed!"
