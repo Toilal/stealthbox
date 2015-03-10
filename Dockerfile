@@ -152,6 +152,9 @@ RUN /opt/stealthbox/docker/runit_logs.sh
 RUN chown -R box:box /home/box
 RUN chown -R box:box /opt/*
 
+# Remove PAM checks on password
+RUN sed -ri 's/^(password\s+.*?\s+pam_unix.so\s+).*/\1sha512 minlen=0/' /etc/pam.d/common-password
+
 # Enable SSH
 RUN rm -f /etc/service/sshd/down
 
