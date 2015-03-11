@@ -30,23 +30,28 @@ docker run -d \
 All services are installed with a `box` username and a randomly generated password. This password is displayed when
 container is starting. 
 
-To retrieve, you can use `docker logs`:
+To retrieve the generated password, you can use `docker logs`:
 
 ```
 docker logs stealthbox | grep Password:
 ```
 
 To set your own password when running the container, add `-e PASSWORD=` followed with the password of your choice to 
-`docker run` command.
+`docker run` command. Alternatively, you can run the container with `-it` flag, and it will ask the password on startup
+in the console.
 
-You can also change the password using `boxpasswd` command from shell.
+If the container is already running, password can be changed with `boxpasswd` command from shell. (using SSH access,
+by opening bash with `docker exec -it stealthbox bash`)
 
-Password must be long and strong enough to be accepted (checked with 
-[cracklib-check](http://sourceforge.net/projects/cracklib)).
+If you both need to keep `-it` flag and generate the password, you can add `-e NONINTERACTIVE=1` to `docker run`
+command.
+
+Password is checked with
+[cracklib-check](http://sourceforge.net/projects/cracklib), it must be long and strong enough to be accepted.
 
 ## Components
 
-Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>` with ports used in `docker run` command.
+*Replace `<stealthbox>` with IP address of your server and `<8443>`/`<8022>` with ports used in `docker run` command.*
 
 ### [Pydio](https://pyd.io/)
 
