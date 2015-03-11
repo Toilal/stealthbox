@@ -9,6 +9,11 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
+if [ ! "$(whoami)" == "box" ]; then
+	echo "boxpasswd must run as 'box' user."
+	exit 126;
+fi;
+
 if [ -z "$1" ]; then
 	echo -n "New password: "
 	read -s PASSWORD
