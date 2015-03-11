@@ -70,7 +70,7 @@ couchpotato_status=$(sv status couchpotato | cut -d ':' -f1)
 if [ "$couchpotato_status" == "run" ]; then sv -v -w 15 force-stop couchpotato; fi;
 
 couchpotato_md5=$(echo -n $PASSWORD| md5sum | cut -d ' ' -f 1)
-sed -ri "s/^(password\s*=\s*).*/\1$couchpotato_md5/" /home/box/couchpotato/settings.conf
+{ cat /home/box/couchpotato/settings.conf; echo -e "\n[core]\npassword = $couchpotato_md5\n\n[deluge]\npassword = $PASSWORD\n"; } | $DIR/tools/ConfigParserPipe.py> /home/box/couchpotato/settings.conf
 
 if [ "$couchpotato_status" == "run" ]; then sv start couchpotato; fi;
 
@@ -78,8 +78,7 @@ if [ "$couchpotato_status" == "run" ]; then sv start couchpotato; fi;
 sickrage_status=$(sv status sickrage | cut -d ':' -f1)
 if [ "$sickrage_status" == "run" ]; then sv -v -w 15 force-stop sickrage; fi;
 
-sed -ri "s/^(web_password\s*=\s*).*/\1$PASSWORD/" /home/box/sickrage/config.ini
-sed -ri "s/^(torrent_password\s*=\s*).*/\1$PASSWORD/" /home/box/sickrage/config.ini
+{ cat /home/box/sickrage/config.ini; echo -e "\n[General]\nweb_password = $PASSWORD\n\n[TORRENT]\ntorrent_password = $PASSWORD\n"; } | $DIR/tools/ConfigParserPipe.py> /home/box/sickrage/config.ini
 
 if [ "$sickrage_status" == "run" ]; then sv start sickrage; fi;
 
@@ -87,7 +86,7 @@ if [ "$sickrage_status" == "run" ]; then sv start sickrage; fi;
 headphones_status=$(sv status headphones | cut -d ':' -f1)
 if [ "$headphones_status" == "run" ]; then sv -v -w 15 force-stop headphones; fi;
 
-sed -ri "s/^(http_password\s*=\s*).*/\1$PASSWORD/" /home/box/headphones/config.ini
+{ cat /home/box/headphones/config.ini; echo -e "\n[General]\nhttp_password = $PASSWORD\n"; } | $DIR/tools/ConfigParserPipe.py> /home/box/headphones/config.ini
 
 if [ "$headphones_status" == "run" ]; then sv start headphones; fi;
 
