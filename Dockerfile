@@ -26,7 +26,8 @@ RUN apt-get update -y
 # +---------+
 
 # tools
-RUN apt-get install -y wget git sqlite3 pwgen libcrack2 expect
+RUN apt-get install -y wget git sqlite3 pwgen libcrack2 expect python-pip
+RUN pip install virtualenv
 
 # php5-fpm
 RUN apt-get install -y php5 php5-fpm php5-gd php5-cli php5-mcrypt php5-sqlite
@@ -39,9 +40,12 @@ RUN apt-get update -y
 RUN apt-get install -y deluged deluge-web
 
 # flexget
-RUN apt-get install -y python-pip
-RUN pip install flexget
-RUN pip install six --upgrade # python-six is 1.5.2 but flexget requires >= 1.7
+RUN apt-get install -y 
+RUN git clone -b master https://github.com/Flexget/Flexget.git /opt/flexget
+
+# deluge plugin currently requires --system-site-packages virtualenv.
+RUN pip install --upgrade six
+RUN cd /opt/flexget && python /opt/flexget/bootstrap.py --system-site-packages
 
 # pydio
 RUN mkdir -p /opt/pydio
@@ -50,15 +54,15 @@ RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-chan
 
 # SickRage
 RUN apt-get install -y python-cheetah
-RUN mkdir -p /opt/sickrage
+RUN mkdir -p sickrage
 RUN git clone https://github.com/SiCKRAGETV/SickRage.git /opt/sickrage
 
 # CouchPotato
-RUN mkdir -p /opt/couchpotato
+RUN mkdir -p couchpotato
 RUN git clone https://github.com/RuudBurger/CouchPotatoServer.git /opt/couchpotato
 
 # HeadPhones
-RUN mkdir -p /opt/headphones
+RUN mkdir -p headphones
 RUN git clone https://github.com/rembo10/headphones /opt/headphones
 
 # +-----------+

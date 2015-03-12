@@ -5,4 +5,5 @@ chown box:box -R /etc/service/flexget/supervise
 chown box:box -R /etc/service/flexget/log
 
 cd /home/box/flexget
-exec setuser box flexget daemon start
+source /opt/flexget/bin/activate
+exec setuser box /opt/flexget/bin/flexget daemon start
