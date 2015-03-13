@@ -64,8 +64,8 @@ deluge=$($DIR/passwd/passwd.deluge.py $PASSWORD)
 deluge_sha1=$(echo $deluge | cut -d ':' -f 1)
 deluge_salt=$(echo $deluge | cut -d ':' -f 2)
 
-sed -ri "s/(\"pwd_sha1\":).*?(,)/\1 \"$deluge_sha1\"\2/" /home/box/deluge/web.conf
-sed -ri "s/(\"pwd_salt\":).*?(,)/\1 \"$deluge_salt\"\2/" /home/box/deluge/web.conf
+sed -ri "s/(\"pwd_sha1\":).*\"(,?)\s*$/\1 \"$deluge_sha1\"\2/" /home/box/deluge/web.conf
+sed -ri "s/(\"pwd_salt\":).*\"(,?)\s*$/\1 \"$deluge_salt\"\2/" /home/box/deluge/web.conf
 
 if [ "$deluge_status" == "run" ]; then sv start deluge; fi;
 if [ "$deluge_web_status" == "run" ]; then sv start deluge-web; fi;
