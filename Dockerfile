@@ -148,6 +148,9 @@ RUN mkdir -p /home/box/logs
 RUN /opt/stealthbox/docker/lsb_compat.sh
 RUN /opt/stealthbox/docker/runit_logs.sh
 
+# Add bin
+ADD bin /home/box/bin
+
 # +---------+
 # | PREPARE |
 # +---------+

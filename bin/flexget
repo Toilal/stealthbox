@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /home/box/flexget
+source /opt/flexget/bin/activate
+/opt/flexget/bin/flexget "$@"
