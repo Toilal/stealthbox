@@ -35,11 +35,9 @@ server {
             rewrite ^/api /rest.php last;
             # External users 
             rewrite ^/user ./index.php?get_action=user_access_point last;
-            # Public shares
-            rewrite ^/data/public/([a-zA-Z0-9_-]+)\.php$ /data/public/share.php?hash=$1?;
     }
-    rewrite ^/data/public/([a-zA-Z0-9_-]+)--([a-z]+)$ /data/public/share.php?hash=$1&lang=$2?;
-    rewrite ^/data/public/([a-zA-Z0-9_-]+)$ /data/public/share.php?hash=$1?;
+    rewrite ^/public/([a-zA-Z0-9_-]+)--([a-z]+)$ /data/public/share.php?hash=$1&lang=$2?;
+    rewrite ^/public/([a-zA-Z0-9_-]+)$ /data/public/share.php?hash=$1?;
 
     # Prevent Clickjacking
     add_header X-Frame-Options "SAMEORIGIN";
@@ -54,6 +52,9 @@ server {
     }
     # Enables PHP
     location ~ \.php$ {
+            # Public shares
+            rewrite ^/public/([a-zA-Z0-9_-]+)\.php$ /data/public/share.php?hash=$1?;
+
             # for ^/(index|plugins) request_uri should be changed
             set $request_url $request_uri;
             if ( $uri ~ ^/(index|plugins) ) {

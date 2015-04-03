@@ -93,6 +93,7 @@ ADD flexget/* /home/box/flexget/
 # pydio
 RUN sed -ri 's/^(define\("AJXP_DATA_PATH",\s*).*(\);)/\1"\/home\/box\/pydio"\2/' /opt/pydio/conf/bootstrap_context.php
 RUN mv /opt/pydio/data /home/box/pydio
+RUN ln -s /home/box/pydio /opt/pydio/data
 
 ADD pydio/bootstrap.json /home/box/pydio/plugins/boot.conf/
 ADD pydio/pydio.db /home/box/pydio/plugins/conf.sql/
