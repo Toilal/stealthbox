@@ -1,6 +1,0 @@
-#!/bin/bash
-
-chmod 770 /etc/service/headphones/supervise
-chown box:box -R /etc/service/headphones
-
-exec setuser box python /opt/headphones/Headphones.py -p 8181 --datadir /home/box/headphones --nolaunch 
