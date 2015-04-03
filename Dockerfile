@@ -155,6 +155,7 @@ ADD bin /home/box/bin
 # Keep some etc configuration files
 RUN mkdir /home/box/etc
 
+RUN cp -R /etc/ssh /etc/ssh.default
 RUN mv /etc/ssh /home/box/etc
 RUN ln -s /home/box/etc/ssh /etc/ssh
 
