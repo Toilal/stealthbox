@@ -152,6 +152,12 @@ RUN /opt/stealthbox/docker/runit_logs.sh
 # Add bin
 ADD bin /home/box/bin
 
+# Keep some etc configuration files
+RUN mkdir /home/box/etc
+
+RUN mv /etc/ssh /home/box/etc
+RUN ln -s /home/box/etc/ssh /etc/ssh
+
 # +---------+
 # | PREPARE |
 # +---------+
