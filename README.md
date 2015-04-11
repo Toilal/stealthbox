@@ -6,7 +6,7 @@ StealthBox is a [Docker](https://www.docker.com/) image, so you can install it o
 it.
 
 It embeds several applications that are configured together to automate file sharing in the cloud and download content
-to your home: 
+to your home:
 
 - [Deluge](http://deluge-torrent.org/), a BitTorrent client.
 - [SickRage](http://sickrage.tv), an automatic shows downloader.
@@ -28,7 +28,7 @@ docker run -d \
 ## Username & Password
 
 All services are installed with a `box` username and a randomly generated password. This password is displayed when
-container is starting. 
+container is starting.
 
 To retrieve the generated password, you can use `docker logs`:
 
@@ -36,7 +36,7 @@ To retrieve the generated password, you can use `docker logs`:
 docker logs stealthbox | grep Password:
 ```
 
-To set your own password when running the container, add `-e PASSWORD=` followed with the password of your choice to 
+To set your own password when running the container, add `-e PASSWORD=` followed with the password of your choice to
 `docker run` command. Alternatively, you can run the container with `-it` flag, and it will ask the password on startup
 in the console.
 
@@ -146,12 +146,22 @@ Flexget is installed in [Daemon](http://flexget.com/wiki/Daemon) mode.
 
 Configuration file is `/home/box/flexget/config.yml`, and will be automatically reloaded in Daemon when changed.
 
+### Open applications inside Pydio
+
+Pydio is able to open files ending with ".url". Thus you can open your apps directly inside the pydio interface.
+
+Example for deluge : Create a file named "deluge.url" in pydio. Right click on it and choose to edit with the text editor.
+Add your deluge url inside it : ```web:https://<stealthbox>:<8443>/deluge.```
+Save it.
+Set "External window" as the default handler for this file.
+You can now open deluge by double-clicking on the file "deluge.url".
+
 ### Use your own SSL certificate
 
 Self-signed SSL certificate is generated when running the container for the first time. But self-signed certificates
 generates warning in browser when trying to connect.
 
-To avoid this warning, you can use a certificate from trusted authority, and load them in StealthBox. 
+To avoid this warning, you can use a certificate from trusted authority, and load them in StealthBox.
 [StartSSL](https://www.startssl.com) can provide free trusted certificate.
 
 - Replacing certificate in container
@@ -177,7 +187,7 @@ Make sure correct access rights are defined.
 
 ```bash
 chown 1000:1000 \
-  /home/docker/ssl/stealthbox.key \ 
+  /home/docker/ssl/stealthbox.key \
   /home/docker/ssl/stealthbox.crt
 
 chmod 400 /home/docker/ssl/stealthbox.key
@@ -200,7 +210,7 @@ Web server will then be available at `http://<stealthbox>:8080`.
 
 ### tcp/6881
 
-`tcp/6881` is the port use by Torrent protocol in deluge. Your have to map this port on the same host port.
+`tcp/6881` is the port use by Torrent protocol in deluge. You have to map this port on the same host port.
 
 If `tcp/6881` is not available on host, or if you really need to change this port, you have to configure deluge for
 port to match, in web UI, or in `/home/box/deluge/core.conf` (`listen_ports` parameter).
