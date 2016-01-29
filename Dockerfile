@@ -55,7 +55,7 @@ RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-chan
 # SickRage
 RUN apt-get install -y python-cheetah
 RUN mkdir -p sickrage
-RUN git clone https://github.com/SiCKRAGETV/SickRage.git /opt/sickrage
+RUN git clone https://github.com/SickRage/SickRage.git /opt/sickrage
 
 # CouchPotato
 RUN mkdir -p couchpotato

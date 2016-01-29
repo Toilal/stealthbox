@@ -79,9 +79,9 @@ configuration: ~/.config/deluge
 service: deluge
 ```
 
-### [SickRage](https://sickrage.tv/)
+### [SickRage](http://sickrage.github.io/)
 
-[SickRage](https://sickrage.tv/) is a Video File Manager for TV Shows, It watches for new episodes of your favorite
+[SickRage](http://sickrage.github.io/) is a Video File Manager for TV Shows, It watches for new episodes of your favorite
 shows and when they are posted it does its magic.
 
 ```
