@@ -105,7 +105,10 @@ rm $DIR/boxpasswd.tmp
 if [ "$headphones_status" == "run" ]; then sv start headphones; fi;
 
 # Pydio
-pydio_hash=$(php -f $DIR/passwd/passwd.pydio.php "password=$PASSWORD")
-sqlite3 /home/box/pydio/plugins/conf.sql/pydio.db "UPDATE ajxp_users SET password='$pydio_hash' WHERE login='box'"
+if [ -f "/home/box/pydio/plugins/conf.sql/pydio.db" ];
+then
+    pydio_hash=$(php -f $DIR/passwd/passwd.pydio.php "password=$PASSWORD")
+    sqlite3 /home/box/pydio/plugins/conf.sql/pydio.db "UPDATE ajxp_users SET password='$pydio_hash' WHERE login='box'"
+fi
 
 echo "Password changed!"

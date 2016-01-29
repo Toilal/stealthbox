@@ -49,7 +49,7 @@ RUN cd /opt/flexget && python /opt/flexget/bootstrap.py --system-site-packages
 
 # pydio
 RUN mkdir -p /opt/pydio
-RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-channel/6.0.5/pydio-core-6.0.5.tar.gz \
+RUN wget -qO- http://sourceforge.net/projects/ajaxplorer/files/pydio/stable-channel/6.2.2/pydio-core-6.2.2.tar.gz \
     | tar xvz --strip-components=1 -C /opt/pydio
 
 # SickRage

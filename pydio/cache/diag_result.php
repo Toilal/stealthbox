@@ -1,5 +1,5 @@
 <?php $diagResults = array (
-  'Client' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36',
+  'Client' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36',
   'Command Line Available' => 'Yes',
   'DOM Enabled' => 'Yes',
   'Exif Enabled' => 'Yes',
@@ -14,18 +14,19 @@
   'Server OS' => 'Linux',
   'Session Save Path' => '/var/lib/php5',
   'Session Save Path Writeable' => true,
-  'PHP Version' => '5.5.9-1ubuntu4.6',
+  'PHP Version' => '5.5.9-1ubuntu4.14',
   'Locale' => 'en_US.UTF-8',
   'Directory Separator' => '/',
   'PHP APC extension loaded' => 'Yes',
   'PHP Output Buffer disabled' => 'Yes',
+  'PHP File Uploads enabled' => 'Yes',
   'Magic quotes disabled' => 'Yes',
   'Upload Tmp Dir Writeable' => true,
   'PHP Upload Max Size' => 549755813888,
   'PHP Post Max Size' => 549755813888,
   'Users enabled' => true,
   'Guest enabled' => false,
-  'Writeable Folders' => '[<b>cache</b>:true,<br> <b>pydio</b>:true]',
+  'Writeable Folders' => '[<b>cache</b>:true,<br> <b>data</b>:true]',
   'Zlib Enabled' => 'Yes',
 );$outputArray = array (
   0 => 
@@ -33,14 +34,14 @@
     'name' => 'Pydio version',
     'result' => false,
     'level' => 'info',
-    'info' => 'Version : 6.0.3',
+    'info' => 'Version : 6.2.2',
   ),
   1 => 
   array (
     'name' => 'Client Browser',
     'result' => false,
     'level' => 'info',
-    'info' => 'Current client Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36',
+    'info' => 'Current client Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36',
   ),
   2 => 
   array (
@@ -116,7 +117,7 @@ Xml parser enabled=1',
     'name' => 'PHP version',
     'result' => true,
     'level' => 'error',
-    'info' => 'Minimum required version is PHP 5.3.0',
+    'info' => 'Minimum required version is PHP 5.4.0',
   ),
   12 => 
   array (
@@ -134,19 +135,26 @@ Xml parser enabled=1',
   ),
   14 => 
   array (
+    'name' => 'PHP File Uploads enabled',
+    'result' => true,
+    'level' => 'warning',
+    'info' => 'PHP File Uploads is enabled',
+  ),
+  15 => 
+  array (
     'name' => 'Magic quotes disabled',
     'result' => true,
     'level' => 'error',
     'info' => 'Magic quotes need to be disabled, only relevent for php 5.3',
   ),
-  15 => 
+  16 => 
   array (
     'name' => 'SSL Encryption',
     'result' => false,
     'level' => 'warning',
     'info' => 'You are not using SSL encryption, or it was not detected by the server. Be aware that it is strongly recommended to secure all communication of data over the network.<p class=\'suggestion\'><b>Suggestion</b> : if your server supports HTTPS, set the AJXP_FORCE_SSL_REDIRECT parameter in the <i>conf/bootstrap_conf.php</i> file.</p>',
   ),
-  16 => 
+  17 => 
   array (
     'name' => 'Server charset encoding',
     'result' => true,
@@ -155,7 +163,7 @@ Xml parser enabled=1',
         in your locale definition in the form: en_us.UTF-8. Please refer to setlocale man page.
         If your detected locale is C, simply type echo $LANG on your server command line to read the correct value.',
   ),
-  17 => 
+  18 => 
   array (
     'name' => 'Upload particularities',
     'result' => false,
@@ -165,39 +173,39 @@ Upload Tmp Dir Writeable=1
 PHP Upload Max Size=549755813888
 PHP Post Max Size=549755813888',
   ),
-  18 => 
+  19 => 
   array (
     'name' => 'Users Configuration',
     'result' => false,
     'level' => 'info',
     'info' => 'Current config for users',
   ),
-  19 => 
+  20 => 
   array (
     'name' => 'Required writeable folder',
     'result' => false,
     'level' => 'info',
-    'info' => '[<b>cache</b>:true,<br><b>pydio</b>:true]',
+    'info' => '[<b>cache</b>:true,<br><b>data</b>:true]',
   ),
-  20 => 
+  21 => 
   array (
     'name' => 'Zlib extension (ZIP)',
     'result' => false,
     'level' => 'info',
     'info' => 'Extension enabled : 1',
   ),
-  21 => 
+  22 => 
   array (
     'name' => 'Filesystem Plugin
- Testing repository : Fichiers communs',
+ Testing repository : Common Files',
     'result' => true,
     'level' => 'error',
     'info' => '',
   ),
-  22 => 
+  23 => 
   array (
     'name' => 'Filesystem Plugin
- Testing repository : Mes fichiers',
+ Testing repository : My Files',
     'result' => true,
     'level' => 'error',
     'info' => '',
