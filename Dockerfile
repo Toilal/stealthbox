@@ -111,7 +111,9 @@ ADD couchpotato/* /home/box/couchpotato/
 # 3rd party providers for CouchPotato
 # https://couchpota.to/forum/viewtopic.php?f=17&t=1428&p=6115
 RUN mkdir -p /home/box/couchpotato/custom_plugins
-RUN git clone https://github.com/djoole/couchpotato.provider.t411 /home/box/couchpotato/custom_plugins/t411
+RUN git clone https://github.com/cocazoulou/couchpotato.provider.t411.git /home/box/couchpotato/custom_plugins/t411.tmp
+RUN mv /home/box/couchpotato/custom_plugins/t411.tmp/t411 /home/box/couchpotato/custom_plugins
+RUN rm -R /home/box/couchpotato/custom_plugins/t411.tmp
 
 # HeadPhones
 RUN mkdir -p /home/box/headphones
