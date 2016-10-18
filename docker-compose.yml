@@ -43,6 +43,9 @@ couchpotato:
     - "5050:5050"
   links:
     - deluge
+  volumes_from:
+    - stealthbox-conf
+    - stealthbox-tools
 headphones:
   build: headphones
   ports:
@@ -68,13 +71,7 @@ sshd:
    - couchpotato
    - headphones
    - sonarr
-stealthbox-cli:
-  build: stealthbox-cli
-  volumes_from:
-   - ssl
-   - pydio
-   - deluge
-   - sickrage
-   - couchpotato
-   - headphones
-   - sonarr
+stealthbox-tools:
+  build: stealthbox-tools
+stealthbox-conf:
+  build: stealthbox-conf
