@@ -79,3 +79,5 @@ services:
     build: stealthbox-tools
   stealthbox-conf:
     build: stealthbox-conf
+    volumes:
+     - './stealthbox.json:/home/box/conf/stealthbox.json'
