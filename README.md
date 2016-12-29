@@ -14,3 +14,8 @@ to your home:
 - [HeadPhones](https://github.com/rembo10/headphones), an automated music downloader.
 - [FlexGet](http://flexget.com/), a multipurpose automation tool
 - [Pydio](https://pyd.io/), a web application to view, edit and download files.
+
+## Requirements
+
+- `docker 1.10.0+`
+- `docker-compose 1.6.0+`
