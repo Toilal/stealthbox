@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 
-RUN apk add --update ca-certificates python && rm -rf /var/cache/apk/*
+RUN apk add --update ca-certificates python jq && rm -rf /var/cache/apk/*
 
 RUN adduser -u 1337 -S box
 
@@ -11,6 +11,7 @@ RUN apk add --update git &&\
  rm -rf /var/cache/apk/*
 
 COPY data /home/box/headphones/data
+COPY run.sh /home/box/headphones/run.sh
 
 RUN chown -R box /home/box && chgrp -R nogroup /home/box
 
@@ -20,4 +21,4 @@ WORKDIR /home/box/headphones
 VOLUME /home/box/headphones
 
 USER box
-CMD ["python", "/home/box/headphones/install/Headphones.py", "-p", "8181", "--datadir", "/home/box/headphones/data", "--nolaunch"]
+CMD ["/home/box/headphones/run.sh"]
