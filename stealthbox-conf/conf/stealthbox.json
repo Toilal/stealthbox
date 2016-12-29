@@ -5,5 +5,8 @@
   },
   "headphones": {
     "password": "box12345"
+  },
+  "pydio": {
+    "password": "box1234"
   }
 }
