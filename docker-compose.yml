@@ -1,77 +1,82 @@
-ssl:
-  build: ssl
-pydio:
-  build: pydio
-php-fpm:
-  build: php-fpm
-  ports:
-   - "9000:9000"
-  volumes_from:
-   - pydio
-nginx:
-  build: nginx
-  volumes_from:
-   - pydio
-   - ssl
-  ports:
-   - "50080:80"
-   - "50443:443"
-  links:
-   - pydio
-   - php-fpm
-   - deluge
-   - sickrage
-   - couchpotato
-   - headphones
-   - sonarr
-flexget:
-  build: flexget
-deluge:
-  build: deluge
-  ports:
-    - "8112:8112"
-    - "58846:58846"
-sickrage:
-  build: sickrage
-  ports:
-    - "8074:8074"
-  links:
-    - deluge
-couchpotato:
-  build: couchpotato
-  ports:
-    - "5050:5050"
-  links:
-    - deluge
-  volumes_from:
-    - stealthbox-conf
-    - stealthbox-tools
-headphones:
-  build: headphones
-  ports:
-    - "8181:8181"
-  links:
-    - deluge
-sonarr:
-  build: sonarr
-  ports:
-    - "8989:8989"
-    - "9898:9898"
-  links:
-    - deluge
-sshd:
-  build: sshd
-  ports:
-   - "50022:22"
-  volumes_from:
-   - ssl
-   - pydio
-   - deluge
-   - sickrage
-   - couchpotato
-   - headphones
-   - sonarr
-stealthbox-tools:
-  build: stealthbox-tools
-stealthbox-conf:
-  build: stealthbox-conf
+version: '2'
+services:
+  ssl:
+    build: ssl
+  pydio:
+    build: pydio
+  php-fpm:
+    build: php-fpm
+    ports:
+     - '9000:9000'
+    volumes_from:
+     - pydio
+  nginx:
+    build: nginx
+    volumes_from:
+     - pydio
+     - ssl
+    ports:
+     - '50080:80'
+     - '50443:443'
+    links:
+     - pydio
+     - php-fpm
+     - deluge
+     - sickrage
+     - couchpotato
+     - headphones
+     - sonarr
+  flexget:
+    build: flexget
+  deluge:
+    build: deluge
+    ports:
+      - '8112:8112'
+      - '58846:58846'
+  sickrage:
+    build: sickrage
+    ports:
+      - '8074:8074'
+    links:
+      - deluge
+  couchpotato:
+    build: couchpotato
+    ports:
+      - '5050:5050'
+    links:
+      - deluge
+    volumes_from:
+      - stealthbox-conf
+      - stealthbox-tools
+  headphones:
+    build: headphones
+    ports:
+      - '8181:8181'
+    links:
+      - deluge
+    volumes_from:
+      - stealthbox-conf
+      - stealthbox-tools
+  sonarr:
+    build: sonarr
+    ports:
+      - '8989:8989'
+      - '9898:9898'
+    links:
+      - deluge
+  sshd:
+    build: sshd
+    ports:
+     - '50022:22'
+    volumes_from:
+     - ssl
+     - pydio
+     - deluge
+     - sickrage
+     - couchpotato
+     - headphones
+     - sonarr
+  stealthbox-tools:
+    build: stealthbox-tools
+  stealthbox-conf:
+    build: stealthbox-conf
