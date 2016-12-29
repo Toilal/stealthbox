@@ -4,7 +4,6 @@ services:
     build: ssl
   pydio:
     build: pydio
-    restart: unless-stopped
   php-fpm:
     build: php-fpm
     ports:
