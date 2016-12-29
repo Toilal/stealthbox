@@ -1,12 +1,15 @@
 FROM alpine
 MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 
+# Install CA certificates
+RUN apk add --update ca-certificates && rm -rf /var/cache/apk/*
+
 # Add boost dependencies
 RUN apk add --update build-base boost linux-headers bzip2-dev python python-dev &&\
     rm -rf /var/cache/apk/*
 
 # Build boost
-RUN wget http://downloads.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz &&\
+RUN wget http://freefr.dl.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz &&\
     mkdir -p /usr/src &&\
     tar -zxf boost_1_60_0.tar.gz -C /usr/src &&\
     ln -s /usr/src/boost_1_60_0 /usr/src/boost &&\
@@ -40,7 +43,9 @@ RUN apk add --update libffi-dev geoip-dev intltool py-pip py-cffi py-gtk xdg-uti
     rm -rf /var/cache/apk/*
 
 # install deluge pip dependencies
-RUN pip install setuptools six pyopenssl twisted[tls] chardet mako pyxdg slimit service_identity
+RUN apk add --update ca-certificates &&\
+    pip install setuptools six pyopenssl twisted[tls] chardet mako pyxdg slimit service_identity &&\
+    apk del ca-certificates
 
 RUN adduser -u 1337 -S box
 
