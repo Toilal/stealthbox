@@ -11,4 +11,4 @@ echo -e "password = $(jq -r "if .deluge.password then .deluge.password else .pas
 cat run.sh.tmp | ../tools/ConfigParserPipe.py> data/settings.conf
 rm run.sh.tmp
 
-python install/CouchPotato.py --data_dir data
+python install/CouchPotato.py --data_dir data --console_log
