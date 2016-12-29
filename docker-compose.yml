@@ -4,6 +4,7 @@ services:
     build: ssl
   pydio:
     build: pydio
+    restart: unless-stopped
   php-fpm:
     build: php-fpm
     ports:
@@ -30,17 +31,20 @@ services:
     build: flexget
   deluge:
     build: deluge
+    restart: unless-stopped
     ports:
       - '8112:8112'
       - '58846:58846'
   sickrage:
     build: sickrage
+    restart: unless-stopped
     ports:
       - '8074:8074'
     links:
       - deluge
   couchpotato:
     build: couchpotato
+    restart: unless-stopped
     ports:
       - '5050:5050'
     links:
@@ -50,6 +54,7 @@ services:
       - stealthbox-tools
   headphones:
     build: headphones
+    restart: unless-stopped
     ports:
       - '8181:8181'
     links:
@@ -59,6 +64,7 @@ services:
       - stealthbox-tools
   sonarr:
     build: sonarr
+    restart: unless-stopped
     ports:
       - '8989:8989'
       - '9898:9898'
