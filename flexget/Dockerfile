@@ -22,4 +22,4 @@ WORKDIR /home/box/flexget
 VOLUME /home/box/flexget
 
 USER box
-CMD ["flexget", "-c", "/var/flexget/config.yml"]
+CMD ["flexget", "-c", "data/config.yml", "daemon", "start"]
