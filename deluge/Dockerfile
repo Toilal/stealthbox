@@ -1,51 +1,29 @@
-FROM alpine
+FROM alpine:edge
 MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 
 # Install CA certificates
 RUN apk add --update ca-certificates && rm -rf /var/cache/apk/*
 
-# Add boost dependencies
-RUN apk add --update build-base boost linux-headers bzip2-dev python python-dev &&\
-    rm -rf /var/cache/apk/*
+# Install SSL support
+RUN apk add --update openssl && rm -rf /var/cache/apk/*
 
-# Build boost
-RUN wget http://freefr.dl.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz &&\
-    mkdir -p /usr/src &&\
-    tar -zxf boost_1_60_0.tar.gz -C /usr/src &&\
-    ln -s /usr/src/boost_1_60_0 /usr/src/boost &&\
-    rm boost_1_60_0.tar.gz && \
-    cd /usr/src/boost &&\
-    bjam -d 0 release &&\
-    bjam -d 0 --includedir=/usr/include --libdir=/usr/lib install &&\
-    ln -s /usr/bin/bjam /usr/local/bin/b2
+# Install s6 overlay
+RUN wget http://github.com/just-containers/s6-overlay/releases/download/v1.18.1.5/s6-overlay-amd64.tar.gz -O /tmp/s6-overlay.tar.gz &&\
+ tar xzf /tmp/s6-overlay.tar.gz -C / &&\
+ rm /tmp/s6-overlay.tar.gz
 
-ENV BOOST_ROOT /usr/src/boost
-ENV BOOST_BUILD_PATH /usr/src/boost/tools/build
+COPY services.d /etc/services.d
+COPY fix-attrs.d /etc/fix-attrs.d
 
-# Add libtorrent dependencies
-RUN apk add --update openssl openssl-dev &&\
-   rm -rf /var/cache/apk/*
-
-# build libtorrent
-RUN wget https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_0_10/libtorrent-rasterbar-1.0.10.tar.gz &&\
-    mkdir -p /usr/src &&\
-    tar -zxf libtorrent-rasterbar-1.0.10.tar.gz -C /usr/src &&\
-    ln -s /usr/src/libtorrent-rasterbar-1.0.10 /usr/src/libtorrent &&\
-    rm libtorrent-rasterbar-1.0.10.tar.gz &&\
-    cd /usr/src/libtorrent &&\
-    bjam -d 0 release encryption=openssl
-
-# build libtorrent python bindings
-RUN cd /usr/src/libtorrent/bindings/python && python setup.py install
+# Testing repository is required for libtorrent-rasterbar
+RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 
 # install deluge alpine dependencies
-RUN apk add --update libffi-dev geoip-dev intltool py-pip py-cffi py-gtk xdg-utils &&\
+RUN apk add --update build-base openssl-dev bzip2-dev python-dev libtorrent-rasterbar@testing libffi-dev geoip-dev intltool py2-pip py-cffi py-gtk xdg-utils &&\
     rm -rf /var/cache/apk/*
 
 # install deluge pip dependencies
-RUN apk add --update ca-certificates &&\
-    pip install setuptools six pyopenssl twisted[tls] chardet mako pyxdg slimit service_identity &&\
-    apk del ca-certificates
+RUN pip install setuptools six pyopenssl twisted[tls] chardet mako pyxdg slimit service_identity
 
 RUN adduser -u 1337 -S box
 
@@ -57,14 +35,6 @@ RUN apk add --update git &&\
  python setup.py install &&\
  apk del git &&\
  rm -rf /var/cache/apk/*
-
-# install s6 overlay
-RUN wget https://github.com/just-containers/s6-overlay/releases/download/v1.18.1.5/s6-overlay-amd64.tar.gz -O /tmp/s6-overlay.tar.gz &&\
- tar xzf /tmp/s6-overlay.tar.gz -C / &&\
- rm /tmp/s6-overlay.tar.gz
-
-COPY services.d /etc/services.d
-COPY fix-attrs.d /etc/fix-attrs.d
 
 COPY data /home/box/deluge/data
 RUN mkdir -p /home/box/deluge/data/downloads
