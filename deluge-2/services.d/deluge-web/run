@@ -1,5 +1,0 @@
-#!/usr/bin/execlineb -P
-
-s6-setuidgid box
-cd /home/box/deluge/data
-deluge-web -d -c config -L info -l config/deluge-web.log

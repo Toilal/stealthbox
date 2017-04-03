@@ -7,14 +7,6 @@ RUN apk add --update ca-certificates && rm -rf /var/cache/apk/*
 # Install SSL support
 RUN apk add --update openssl && rm -rf /var/cache/apk/*
 
-# Install s6 overlay
-RUN wget http://github.com/just-containers/s6-overlay/releases/download/v1.18.1.5/s6-overlay-amd64.tar.gz -O /tmp/s6-overlay.tar.gz &&\
- tar xzf /tmp/s6-overlay.tar.gz -C / &&\
- rm /tmp/s6-overlay.tar.gz
-
-COPY services.d /etc/services.d
-COPY fix-attrs.d /etc/fix-attrs.d
-
 # Testing repository is required for libtorrent-rasterbar
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 
@@ -29,22 +21,26 @@ RUN adduser -u 1337 -S box
 
 # clone and install deluge
 RUN apk add --update git &&\
- git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/box/deluge/install &&\
- cd /home/box/deluge/install && \
+ git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/box/deluged/install &&\
+ cd /home/box/deluged/install && \
  python setup.py build_plugins &&\
  python setup.py install &&\
  apk del git &&\
  rm -rf /var/cache/apk/*
 
-COPY data /home/box/deluge/data
-RUN mkdir -p /home/box/deluge/data/downloads
+RUN apk add --update jq &&\
+ rm -rf /var/cache/apk/*
+
+COPY data /home/box/deluged/data
+COPY run.sh /home/box/deluged
+RUN mkdir -p /home/box/deluged/data/downloads
 
 RUN chown -R box /home/box && chgrp -R nogroup /home/box
 
-EXPOSE 8112
 EXPOSE 58846
 
-WORKDIR /home/box/deluge
-VOLUME /home/box/deluge
+WORKDIR /home/box/deluged
+VOLUME /home/box/deluged
 
-ENTRYPOINT ["/init"]
+USER box
+CMD ["/home/box/deluged/run.sh"]

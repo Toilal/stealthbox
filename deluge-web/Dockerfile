@@ -7,14 +7,6 @@ RUN apk add --update ca-certificates && rm -rf /var/cache/apk/*
 # Install SSL support
 RUN apk add --update openssl && rm -rf /var/cache/apk/*
 
-# Install s6 overlay
-RUN wget http://github.com/just-containers/s6-overlay/releases/download/v1.18.1.5/s6-overlay-amd64.tar.gz -O /tmp/s6-overlay.tar.gz &&\
- tar xzf /tmp/s6-overlay.tar.gz -C / &&\
- rm /tmp/s6-overlay.tar.gz
-
-COPY services.d /etc/services.d
-COPY fix-attrs.d /etc/fix-attrs.d
-
 # Testing repository is required for libtorrent-rasterbar
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 
@@ -29,23 +21,28 @@ RUN adduser -u 1337 -S box
 
 # clone and install deluge
 RUN apk add --update git &&\
- git clone -b develop https://github.com/deluge-torrent/deluge.git /home/box/deluge/install &&\
- cd /home/box/deluge/install && \
+ git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/box/deluge-web/install &&\
+ cd /home/box/deluge-web/install && \
  python setup.py build_plugins &&\
- # setup.py install doesn't work properly with deluge 2.0, fallback to develop mode.
- python setup.py develop &&\
+ python setup.py install &&\
  apk del git &&\
  rm -rf /var/cache/apk/*
 
-COPY data /home/box/deluge/data
-RUN mkdir -p /home/box/deluge/data/downloads
+RUN rm /usr/bin/deluged # We don't want to launch deluged in this container
+
+RUN apk add --update jq &&\
+ rm -rf /var/cache/apk/*
+
+COPY data /home/box/deluge-web/data
+COPY run.sh /home/box/deluge-web
+RUN mkdir -p /home/box/deluge-web/data/downloads
 
 RUN chown -R box /home/box && chgrp -R nogroup /home/box
 
 EXPOSE 8112
-EXPOSE 58846
 
-WORKDIR /home/box/deluge
-VOLUME /home/box/deluge
+WORKDIR /home/box/deluge-web
+VOLUME /home/box/deluge-web
 
-ENTRYPOINT ["/init"]
+USER box
+CMD ["/home/box/deluge-web/run.sh"]

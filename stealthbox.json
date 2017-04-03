@@ -1,6 +1,9 @@
 {
   "password": "box12345",
-  "deluge": {
+  "deluged": {
+    "password": null
+  },
+  "deluge-web": {
     "password": null
   },
   "headphones": {

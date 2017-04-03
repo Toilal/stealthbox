@@ -6,45 +6,40 @@ services:
       - stealthbox-conf
   flexget:
     build: flexget
-  deluge:
-    build: deluge
+  deluged:
+    build: deluged
     restart: unless-stopped
-    ports:
-      - '8112:8112'
-      - '58846:58846'
+    volumes_from:
+      - stealthbox-conf
+  deluge-web:
+    build: deluge-web
+    depends_on:
+      - deluged
+    restart: unless-stopped
+    volumes_from:
+      - stealthbox-conf
   sickrage:
     build: sickrage
     restart: unless-stopped
-    ports:
-      - '8074:8074'
   couchpotato:
     build: couchpotato
     restart: unless-stopped
-    ports:
-      - '5050:5050'
     volumes_from:
       - stealthbox-conf
       - stealthbox-tools
   headphones:
     build: headphones
     restart: unless-stopped
-    ports:
-      - '8181:8181'
     volumes_from:
       - stealthbox-conf
       - stealthbox-tools
   sonarr:
     build: sonarr
     restart: unless-stopped
-    ports:
-      - '8989:8989'
-      - '9898:9898'
   ssl:
     build: ssl
   php-fpm:
     build: php-fpm
-    ports:
-     - '9000:9000'
     volumes_from:
      - pydio
   nginx:
@@ -58,7 +53,7 @@ services:
     depends_on:
      - pydio
      - php-fpm
-     - deluge
+     - deluge-web
      - sickrage
      - couchpotato
      - headphones
@@ -70,7 +65,7 @@ services:
     volumes_from:
      - ssl
      - pydio
-     - deluge
+     - deluge-web
      - sickrage
      - couchpotato
      - headphones
