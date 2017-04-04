@@ -1,6 +1,14 @@
 #!/usr/bin/env sh
 
-cd /home/box/deluge-web/data
+set -e
 
-#TODO: Update deluged password in hostlist.conf.1.2 and deluge-web password in web.conf (see passwd.deluge.py)
+STEALTHBOX_CONF="../conf/stealthbox.json"
+if [ -f $STEALTHBOX_CONF ]; then
+    ./update.web.password.py $(jq -r 'if .["deluge-web"].password then .["deluge-web"].password else .password end' $STEALTHBOX_CONF | xargs echo -n)
+    ./update.host.password.py $(jq -r 'if .deluged.password then .deluged.password else .password end' $STEALTHBOX_CONF | xargs echo -n)
+else
+    echo "$(basename $STEALTHBOX_CONF) not found. Using default configuration ..."
+fi
+
+cd /home/box/deluge-web/data
 deluge-web -c config -L info

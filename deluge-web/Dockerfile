@@ -35,6 +35,7 @@ RUN apk add --update jq &&\
 
 COPY data /home/box/deluge-web/data
 COPY run.sh /home/box/deluge-web
+COPY *.py /home/box/deluge-web/
 RUN mkdir -p /home/box/deluge-web/data/downloads
 
 RUN chown -R box /home/box && chgrp -R nogroup /home/box
