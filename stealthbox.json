@@ -11,5 +11,8 @@
   },
   "pydio": {
     "password": null
+  },
+  "sshd": {
+    "password": null
   }
 }
