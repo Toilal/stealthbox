@@ -36,8 +36,6 @@ services:
   sonarr:
     build: sonarr
     restart: unless-stopped
-  ssl:
-    build: ssl
   php-fpm:
     build: php-fpm
     volumes_from:
@@ -46,10 +44,8 @@ services:
     build: nginx
     volumes_from:
      - pydio
-     - ssl
     ports:
-     - '50080:80'
-     - '50443:443'
+     - "${PORTS_PREFIX}80:80"
     depends_on:
      - pydio
      - php-fpm
@@ -61,9 +57,8 @@ services:
   sshd:
     build: sshd
     ports:
-     - '50022:22'
+     - "${PORTS_PREFIX}22:22"
     volumes_from:
-     - ssl
      - pydio
      - deluge-web
      - sickrage
