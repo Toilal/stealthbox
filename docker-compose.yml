@@ -64,6 +64,7 @@ services:
     volumes_from:
      - pydio
      - deluge-web
+     - deluged
      - sickrage
      - couchpotato
      - headphones

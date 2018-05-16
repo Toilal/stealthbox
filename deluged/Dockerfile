@@ -33,7 +33,12 @@ RUN apk add --update jq &&\
 
 COPY data /home/box/deluged/data
 COPY run.sh /home/box/deluged
-RUN mkdir -p /home/box/deluged/data/downloads
+
+RUN mkdir -p /home/box/deluge/data/downloads
+RUN mkdir -p /home/box/deluge/data/torrents
+RUN mkdir -p /home/box/deluge/data/tmp
+RUN mkdir -p /home/box/deluge/data/autoadd
+RUN mkdir -p /home/box/deluge/data/plugins
 
 RUN chown -R box /home/box && chgrp -R nogroup /home/box
 
@@ -41,6 +46,7 @@ EXPOSE 58846
 
 WORKDIR /home/box/deluged
 VOLUME /home/box/deluged
+VOLUME /home/box/deluge
 
 USER box
 CMD ["/home/box/deluged/run.sh"]
