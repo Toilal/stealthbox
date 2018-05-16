@@ -6,6 +6,9 @@
   "deluge-web": {
     "password": null
   },
+  "sickrage": {
+    "password": null
+  },
   "headphones": {
     "password": null
   },

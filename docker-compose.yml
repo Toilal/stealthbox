@@ -21,6 +21,9 @@ services:
   sickrage:
     build: sickrage
     restart: unless-stopped
+    volumes_from:
+      - stealthbox-conf
+      - stealthbox-tools
   couchpotato:
     build: couchpotato
     restart: unless-stopped
