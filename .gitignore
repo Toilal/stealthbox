@@ -1,3 +1,5 @@
 *.db-shm
 *.db-wal
+.env
+/stealthbox.json
 docker-compose.override.yml

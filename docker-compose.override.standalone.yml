@@ -1,0 +1,11 @@
+version: '2'
+services:
+  nginx:
+    build: nginx
+    ports:
+     - "${STEALTHBOX_PORTS_PREFIX}80:80"
+    depends_on:
+     - deluge-web
+     - sickrage
+     - couchpotato
+     - headphones

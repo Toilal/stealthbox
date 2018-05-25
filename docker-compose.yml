@@ -1,9 +1,5 @@
 version: '2'
 services:
-  pydio:
-    build: pydio
-    volumes_from:
-      - stealthbox-conf
   deluged:
     build: deluged
     restart: unless-stopped
@@ -34,39 +30,16 @@ services:
     volumes_from:
       - stealthbox-conf
       - stealthbox-tools
-  sonarr:
-    build: sonarr
-    restart: unless-stopped
-  php-fpm:
-    build: php-fpm
-    volumes_from:
-     - pydio
-  nginx:
-    build: nginx
-    volumes_from:
-     - pydio
-    ports:
-     - "${PORTS_PREFIX}80:80"
-    depends_on:
-     - pydio
-     - php-fpm
-     - deluge-web
-     - sickrage
-     - couchpotato
-     - headphones
-     - sonarr
   sshd:
     build: sshd
     ports:
-     - "${PORTS_PREFIX}22:22"
+     - "${STEALTHBOX_PORTS_PREFIX}22:22"
     volumes_from:
-     - pydio
      - deluge-web
      - deluged
      - sickrage
      - couchpotato
      - headphones
-     - sonarr
   stealthbox-tools:
     build: stealthbox-tools
   stealthbox-conf:
