@@ -2,8 +2,7 @@ FROM alpine
 MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 
 RUN apk add --update nginx && rm -rf /var/cache/apk/*
-
-RUN mkdir -p /tmp/nginx/client-body
+RUN chown -R nobody:nobody /var/lib/nginx /var/tmp/nginx
 
 ADD nginx /etc/nginx
 
