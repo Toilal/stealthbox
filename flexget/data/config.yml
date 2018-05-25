@@ -1,8 +1,0 @@
-schedules:
-  - tasks: '*'
-    interval:
-      minutes: 15
-
-tasks:
-  sample:
-    rss: http://localhost:9999

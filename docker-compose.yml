@@ -4,8 +4,6 @@ services:
     build: pydio
     volumes_from:
       - stealthbox-conf
-  flexget:
-    build: flexget
   deluged:
     build: deluged
     restart: unless-stopped

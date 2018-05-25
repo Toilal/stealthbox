@@ -12,7 +12,6 @@ to your home:
 - [SickRage](http://sickrage.tv), an automatic shows downloader.
 - [CouchPotato](https://couchpota.to/), an automatic movies downloader.
 - [HeadPhones](https://github.com/rembo10/headphones), an automated music downloader.
-- [FlexGet](http://flexget.com/), a multipurpose automation tool
 - [Pydio](https://pyd.io/), a web application to view, edit and download files.
 
 ## Requirements
