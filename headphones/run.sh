@@ -5,8 +5,8 @@ cat data/config.ini>run.sh.tmp
 echo -e "[General]">>run.sh.tmp
 echo -e "http_password = $(jq -r "if .headphones.password then .headphones.password else .password end" ../conf/stealthbox.json | xargs echo -n | awk '{print $1}')">>run.sh.tmp
 
-if [ -n "${VIRTUAL_HOST+x}" ]; then
-    echo -e "http_root = /">>run.sh.tmp
+if [ -z "${VIRTUAL_HOST+x}" ]; then
+    echo -e "http_root = /headphones">>run.sh.tmp
 fi
 
 echo -e "">>run.sh.tmp

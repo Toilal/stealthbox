@@ -5,8 +5,8 @@ cat data/config.ini>run.sh.tmp
 echo -e "[General]">>run.sh.tmp
 echo -e "web_password = $(jq -r "if .sickrage.password then .sickrage.password else .password end" ../conf/stealthbox.json | xargs echo -n | awk '{print $1}')">>run.sh.tmp
 
-if [ -n "${VIRTUAL_HOST+x}" ]; then
-    echo -e "web_root = /">>run.sh.tmp
+if [ -z "${VIRTUAL_HOST+x}" ]; then
+    echo -e "web_root = /sickrage">>run.sh.tmp
 fi
 
 echo -e "">>run.sh.tmp
