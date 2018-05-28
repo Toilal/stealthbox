@@ -25,7 +25,7 @@ to your home:
 - Clone the github repository
 
 ```bash
-$ git clone -b 2.x https://github.com/Toilal/stealthbox
+$ git clone https://github.com/Toilal/stealthbox
 $ cd stealthbox
 ```
 
