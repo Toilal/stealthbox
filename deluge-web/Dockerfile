@@ -17,10 +17,6 @@ RUN apk add --update jq git build-base openssl-dev bzip2-dev python-dev libtorre
 # install deluge pip dependencies
 RUN pip install setuptools six pyopenssl twisted[tls] chardet mako pyxdg slimit service_identity
 
-RUN adduser -u 1337 -S box
-RUN chown -R box:nogroup /home/box
-USER box
-
 # clone and install deluge
 RUN git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/box/deluge-web/install &&\
  cd /home/box/deluge-web/install && \
@@ -28,6 +24,11 @@ RUN git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/b
  python setup.py install
 
 RUN rm /usr/bin/deluged # We don't want to launch deluged in this container
+
+RUN adduser -u 1337 -S box
+RUN chown -R box:nogroup /home/box
+USER box
+
 
 COPY data /home/box/deluge-web/data
 COPY run.sh /home/box/deluge-web
