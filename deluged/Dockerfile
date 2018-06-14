@@ -36,6 +36,8 @@ RUN mkdir -p /home/box/deluge/data/tmp
 RUN mkdir -p /home/box/deluge/data/autoadd
 RUN mkdir -p /home/box/deluge/data/plugins
 
+RUN chown -R box:nogroup /home/box/deluged && chown -R box:nogroup /home/box/deluge
+
 EXPOSE 58846
 
 WORKDIR /home/box/deluged

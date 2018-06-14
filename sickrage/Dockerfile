@@ -13,6 +13,8 @@ RUN git clone https://github.com/SickRage/SickRage.git /home/box/sickrage/instal
 COPY data /home/box/sickrage/data
 COPY run.sh /home/box/sickrage/run.sh
 
+RUN chown -R box:nogroup /home/box/sickrage
+
 EXPOSE 8074
 
 VOLUME /home/box/sickrage

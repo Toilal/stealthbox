@@ -29,10 +29,11 @@ RUN adduser -u 1337 -S box
 RUN chown -R box:nogroup /home/box
 USER box
 
-
 COPY data /home/box/deluge-web/data
 COPY run.sh /home/box/deluge-web
 COPY *.py /home/box/deluge-web/
+
+RUN chown -R box:nogroup /home/box/deluge-web
 
 EXPOSE 8112
 

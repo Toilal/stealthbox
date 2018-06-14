@@ -17,6 +17,8 @@ USER box
 
 COPY data /home/box/sonarr/data
 
+RUN chown -R box:nogroup /home/box/sonarr
+
 RUN mkdir -p /home/box/sonarr/data/config/sonarr /home/box/sonarr/data/completed /home/box/sonarr/data/media
 
 EXPOSE 8989

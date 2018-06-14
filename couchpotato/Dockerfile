@@ -12,6 +12,8 @@ RUN git clone -b master https://github.com/CouchPotato/CouchPotatoServer.git /ho
 COPY data /home/box/couchpotato/data
 COPY run.sh /home/box/couchpotato/run.sh
 
+RUN chown -R box:nogroup /home/box/couchpotato
+
 EXPOSE 5050
 
 WORKDIR /home/box/couchpotato

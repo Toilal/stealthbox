@@ -13,6 +13,8 @@ RUN git clone -b master https://github.com/rembo10/headphones.git /home/box/head
 COPY data /home/box/headphones/data
 COPY run.sh /home/box/headphones/run.sh
 
+RUN chown -R box:nogroup /home/box/headphone
+
 EXPOSE 8181
 
 WORKDIR /home/box/headphones
