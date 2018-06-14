@@ -26,14 +26,13 @@ RUN git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/b
 RUN rm /usr/bin/deluged # We don't want to launch deluged in this container
 
 RUN adduser -u 1337 -S box
-RUN chown -R box:nogroup /home/box
-USER box
 
 COPY data /home/box/deluge-web/data
 COPY run.sh /home/box/deluge-web
 COPY *.py /home/box/deluge-web/
 
-RUN chown -R box:nogroup /home/box/deluge-web
+RUN chown -R box:nogroup /home/box
+USER box
 
 EXPOSE 8112
 

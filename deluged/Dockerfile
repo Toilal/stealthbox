@@ -24,8 +24,6 @@ RUN git clone -b 1.3-stable https://github.com/deluge-torrent/deluge.git /home/b
  python setup.py install
 
 RUN adduser -u 1337 -S box
-RUN chown -R box:nogroup /home/box
-USER box
 
 COPY data /home/box/deluged/data
 COPY run.sh /home/box/deluged
@@ -36,7 +34,8 @@ RUN mkdir -p /home/box/deluge/data/tmp
 RUN mkdir -p /home/box/deluge/data/autoadd
 RUN mkdir -p /home/box/deluge/data/plugins
 
-RUN chown -R box:nogroup /home/box/deluged && chown -R box:nogroup /home/box/deluge
+RUN chown -R box:nogroup /home/box
+USER box
 
 EXPOSE 58846
 

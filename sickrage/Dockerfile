@@ -5,15 +5,14 @@ RUN apk add --update python py-pip git jq && rm -rf /var/cache/apk/*
 RUN pip install cheetah
 
 RUN adduser -u 1337 -S box
-RUN chown -R box:nogroup /home/box
-USER box
 
 RUN git clone https://github.com/SickRage/SickRage.git /home/box/sickrage/install
 
 COPY data /home/box/sickrage/data
 COPY run.sh /home/box/sickrage/run.sh
 
-RUN chown -R box:nogroup /home/box/sickrage
+RUN chown -R box:nogroup /home/box
+USER box
 
 EXPOSE 8074
 
