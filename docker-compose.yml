@@ -32,6 +32,7 @@ services:
       - stealthbox-tools
   sshd:
     build: sshd
+    restart: unless-stopped
     ports:
      - "${STEALTHBOX_PORTS_PREFIX}22:22"
     volumes_from:
