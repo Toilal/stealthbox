@@ -9,7 +9,7 @@ It embeds several applications that are configured together to automate file sha
 to your home:
 
 - [Deluge](http://deluge-torrent.org/), a BitTorrent client.
-- [SickRage](http://sickrage.tv), an automatic shows downloader.
+- [Medusa](https://pymedusa.com/), an automatic shows downloader.
 - [CouchPotato](https://couchpota.to/), an automatic movies downloader.
 - [HeadPhones](https://github.com/rembo10/headphones), an automated music downloader.
 - [Sonarr](https://sonarr.tv/). (TODO)
@@ -17,8 +17,8 @@ to your home:
 
 ## Requirements
 
-- `docker 1.10.0+`
-- `docker-compose 1.6.0+`
+- `docker 1.13.0+`
+- `docker-compose 1.13.0+`
 
 ## Install
 
@@ -67,8 +67,8 @@ $ docker-compose up
 ## URLs
 
 - Deluge: [http://localhost:50080/deluge](http://localhost:50080/deluge)
-- SickRage: [http://localhost:50080/sickrage](http://localhost:50080/sickrage)
-- CouchPotato: [http://localhost:50080/couchpota](http://localhost:50080/couchpotato)
+- Medusa: [http://localhost:50080/medusa](http://localhost:50080/medusa)
+- CouchPotato: [http://localhost:50080/couchpotato](http://localhost:50080/couchpotato)
 - HeadPhones: [http://localhost:50080/headphones](http://localhost:50080/headphones)
 
 *Note: Windows user must use the docker-machine ip instead of localhost.*

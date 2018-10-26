@@ -1,49 +1,108 @@
-version: '2'
+version: '2.2'
 services:
   deluged:
     build: deluged
-    restart: unless-stopped
+    image: stealthbox/deluged
+    restart: "${STEALTHBOX_RESTART}"
+    init: true
     volumes_from:
       - stealthbox-conf
   deluge-web:
     build: deluge-web
+    image: stealthbox/deluge-web
     depends_on:
       - deluged
-    restart: unless-stopped
+    restart: ${STEALTHBOX_RESTART}
+    init: true
     volumes_from:
       - stealthbox-conf
-  sickrage:
-    build: sickrage
-    restart: unless-stopped
+  medusa:
+    build: medusa
+    image: stealthbox/medusa
+    restart: "${STEALTHBOX_RESTART}"
+    init: true
     volumes_from:
       - stealthbox-conf
       - stealthbox-tools
   couchpotato:
     build: couchpotato
-    restart: unless-stopped
+    image: stealthbox/couchpotato
+    restart: "${STEALTHBOX_RESTART}"
+    init: true
     volumes_from:
       - stealthbox-conf
       - stealthbox-tools
   headphones:
     build: headphones
-    restart: unless-stopped
+    image: stealthbox/headphones
+    restart: "${STEALTHBOX_RESTART}"
+    init: true
+    volumes_from:
+      - stealthbox-conf
+      - stealthbox-tools
+  pydio:
+    build: pydio
+    image: stealthbox/pydio
+    init: true
+    volumes:
+      - "pydio-opt-scripts:/opt/scripts"
+      - "pydio-opt-pydio:/opt/pydio"
+    volumes_from:
+      - stealthbox-conf
+      - stealthbox-tools
+  pydio-nginx:
+    image: nginx:alpine
+    init: true
+    restart: "${STEALTHBOX_RESTART}"
+    volumes:
+      - "pydio-opt-scripts:/opt/scripts"
+      - "pydio-opt-pydio:/opt/pydio"
+      - "./pydio-nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./pydio-nginx/conf.d:/etc/nginx/conf.d"
+    ports:
+      - "${STEALTHBOX_PORTS_PREFIX}89:80"
+  pydio-db:
+    image: postgres:11
+    init: true
+    restart: "${STEALTHBOX_RESTART}"
+    environment:
+      - POSTGRES_PASSWORD=pydio
+      - POSTGRES_USER=pydio
+  pydio-php-fpm:
+    build: pydio-php-fpm
+    image: stealthbox/pydio-php-fpm
+    restart: "${STEALTHBOX_RESTART}"
+    init: true
+    user: nobody
+    volumes:
+      - "pydio-opt-scripts:/opt/scripts"
+      - "pydio-opt-pydio:/opt/pydio"
     volumes_from:
       - stealthbox-conf
       - stealthbox-tools
   sshd:
     build: sshd
-    restart: unless-stopped
+    image: stealthbox/sshd
+    restart: "${STEALTHBOX_RESTART}"
+    init: true
     ports:
      - "${STEALTHBOX_PORTS_PREFIX}22:22"
     volumes_from:
      - deluge-web
      - deluged
-     - sickrage
+     - medusa
      - couchpotato
      - headphones
   stealthbox-tools:
     build: stealthbox-tools
+    image: stealthbox/stealthbox-tools
+    init: true
   stealthbox-conf:
     build: stealthbox-conf
+    image: stealthbox/stealthbox-conf
+    init: true
     volumes:
      - './stealthbox.json:/home/box/conf/stealthbox.json'
+volumes:
+  pydio-opt-scripts: ~
+  pydio-opt-pydio: ~

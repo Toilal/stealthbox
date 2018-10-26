@@ -1,11 +1,16 @@
-version: '2'
+version: '2.2'
 services:
-  nginx:
-    build: nginx
+  nginx-standalone:
+    image: nginx:alpine
+    init: true
     ports:
      - "${STEALTHBOX_PORTS_PREFIX}80:80"
+    volumes:
+      - "./nginx-standalone/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx-standalone/proxy_params:/etc/nginx/proxy_params"
+      - "./nginx-standalone/conf.d:/etc/nginx/conf.d"
     depends_on:
      - deluge-web
-     - sickrage
+     - medusa
      - couchpotato
      - headphones

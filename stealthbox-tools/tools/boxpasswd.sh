@@ -82,16 +82,16 @@ rm $DIR/boxpasswd.tmp
 
 if [ "$couchpotato_status" == "run" ]; then sv start couchpotato; fi;
 
-# SickRage
-sickrage_status=$(sv status sickrage | cut -d ':' -f1)
-if [ "$sickrage_status" == "run" ]; then sv -v -w 15 force-stop sickrage; fi;
+# medusa
+medusa_status=$(sv status medusa | cut -d ':' -f1)
+if [ "$medusa_status" == "run" ]; then sv -v -w 15 force-stop medusa; fi;
 
-cat /home/box/sickrage/config.ini>$DIR/boxpasswd.tmp
+cat /home/box/medusa/config.ini>$DIR/boxpasswd.tmp
 echo -e "\n[General]\nweb_password = $PASSWORD\n\n[TORRENT]\ntorrent_password = $PASSWORD\n">>$DIR/boxpasswd.tmp
-cat $DIR/boxpasswd.tmp | $DIR/tools/ConfigParserPipe.py> /home/box/sickrage/config.ini
+cat $DIR/boxpasswd.tmp | $DIR/tools/ConfigParserPipe.py> /home/box/medusa/config.ini
 rm $DIR/boxpasswd.tmp
 
-if [ "$sickrage_status" == "run" ]; then sv start sickrage; fi;
+if [ "$medusa_status" == "run" ]; then sv start medusa; fi;
 
 # HeadPhones
 headphones_status=$(sv status headphones | cut -d ':' -f1)

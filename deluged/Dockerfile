@@ -4,14 +4,14 @@ MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 # Install CA certificates
 RUN apk add --update ca-certificates && rm -rf /var/cache/apk/*
 
-# Install SSL support
-RUN apk add --update openssl && rm -rf /var/cache/apk/*
-
 # Testing repository is required for libtorrent-rasterbar
-RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+RUN echo @testing http://dl-cdn.alpinelinux.org/alpine/edge/testing>> /etc/apk/repositories
+
+# Install SSL support
+# RUN apk add --update openssl@testing && rm -rf /var/cache/apk/*
 
 # install deluge alpine dependencies
-RUN apk add --update git jq build-base openssl-dev bzip2-dev python-dev libtorrent-rasterbar@testing libffi-dev geoip-dev intltool py2-pip py-cffi py-gtk xdg-utils &&\
+RUN apk add --update git jq build-base openssl-dev@testing libtorrent-rasterbar@testing bzip2-dev python-dev libffi-dev geoip-dev intltool py2-pip py-cffi py-gtk xdg-utils &&\
     rm -rf /var/cache/apk/*
 
 # install deluge pip dependencies
