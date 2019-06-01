@@ -1,11 +1,11 @@
 FROM alpine
 MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 
-RUN apk add --update wget ca-certificates libssl1.0 sqlite libarchive-tools curl jq && rm -rf /var/cache/apk/*
+RUN apk add --update wget ca-certificates libssl1.1 sqlite libarchive-tools curl jq && rm -rf /var/cache/apk/*
 
 RUN mkdir -p /opt && \
-  wget -qO- https://download.pydio.com/pub/core/archives/pydio-core-8.2.2.zip | bsdtar -xvf- && \
-  mv pydio-core-8.2.2 /opt/pydio
+  wget -qO- https://download.pydio.com/pub/core/archives/pydio-core-8.2.3.zip | bsdtar -xvf- && \
+  mv pydio-core-8.2.3 /opt/pydio
 
 #COPY pydio/bootstrap.json /opt/pydio/data/plugins/boot.conf/
 #COPY pydio/pydio.db /opt/pydio/data/plugins/conf.sql/
