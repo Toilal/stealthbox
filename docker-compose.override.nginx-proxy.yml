@@ -1,6 +1,7 @@
 version: '2.2'
 networks:
-  nginx-proxy:
+  reverse-proxy:
+    name: ${REVERSE_PROXY_NETWORK_NAME}
     external: true
 services:
   deluge-web:
@@ -9,25 +10,25 @@ services:
       - LETSENCRYPT_HOST=deluge.${STEALTHBOX_DOMAIN}
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
   medusa:
     environment:
       - VIRTUAL_HOST=medusa.${STEALTHBOX_DOMAIN}
       - LETSENCRYPT_HOST=medusa.${STEALTHBOX_DOMAIN}
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
   couchpotato:
     environment:
       - VIRTUAL_HOST=couchpotato.${STEALTHBOX_DOMAIN}
       - LETSENCRYPT_HOST=couchpotato.${STEALTHBOX_DOMAIN}
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
   headphones:
     environment:
       - VIRTUAL_HOST=headphones.${STEALTHBOX_DOMAIN}
       - LETSENCRYPT_HOST=headphones.${STEALTHBOX_DOMAIN}
     networks:
       - default
-      - nginx-proxy
+      - reverse-proxy
