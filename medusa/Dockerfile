@@ -13,7 +13,7 @@ COPY run.sh /home/box/medusa/run.sh
 RUN chown -R box:nogroup /home/box
 USER box
 
-EXPOSE 8074
+EXPOSE 8081
 
 VOLUME /home/box/medusa
 WORKDIR /home/box/medusa
