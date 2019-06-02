@@ -12,6 +12,9 @@ services:
       - "./nginx-standalone/nginx.conf:/etc/nginx/nginx.conf"
       - "./nginx-standalone/proxy_params:/etc/nginx/proxy_params"
       - "./nginx-standalone/conf.d:/etc/nginx/conf.d"
+  pydio-nginx:
+    ports:
+      - "${STEALTHBOX_PORTS_PREFIX}89:80"
     depends_on:
      - deluge-web
      - medusa

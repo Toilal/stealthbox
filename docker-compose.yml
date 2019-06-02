@@ -59,8 +59,6 @@ services:
       - "pydio-opt-pydio:/opt/pydio"
       - "./pydio-nginx/nginx.conf:/etc/nginx/nginx.conf"
       - "./pydio-nginx/conf.d:/etc/nginx/conf.d"
-    ports:
-      - "${STEALTHBOX_PORTS_PREFIX}89:80"
   pydio-db:
     image: postgres:11
     init: true
