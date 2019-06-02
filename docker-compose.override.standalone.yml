@@ -1,5 +1,8 @@
 version: '2.2'
 services:
+  deluge-web:
+    ports:
+      - "${STEALTHBOX_PORTS_PREFIX}12:8112"
   nginx-standalone:
     image: nginx:alpine
     init: true

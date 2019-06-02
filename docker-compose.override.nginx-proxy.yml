@@ -7,6 +7,7 @@ services:
   deluge-web:
     environment:
       - VIRTUAL_HOST=deluge.${STEALTHBOX_DOMAIN}
+      - VIRTUAL_PORT=8112
       - LETSENCRYPT_HOST=deluge.${STEALTHBOX_DOMAIN}
     networks:
       - default
