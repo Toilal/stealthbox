@@ -1,0 +1,71 @@
+version: '2.2'
+networks:
+  reverse-proxy:
+    name: ${REVERSE_PROXY_NETWORK_NAME}
+    external: true
+services:
+  deluge-web:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.deluge${STEALTHBOX_SERVICE_SUFFIX}.rule=Host(`deluge.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.deluge${STEALTHBOX_SERVICE_SUFFIX}.service=deluge${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.routers.deluge${STEALTHBOX_SERVICE_SUFFIX}-tls.rule=Host(`deluge.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.deluge${STEALTHBOX_SERVICE_SUFFIX}-tls.tls=true
+      - traefik.http.routers.deluge${STEALTHBOX_SERVICE_SUFFIX}-tls.tls.certresolver=letsencrypt
+      - traefik.http.routers.deluge${STEALTHBOX_SERVICE_SUFFIX}-tls.service=deluge${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.services.deluge${STEALTHBOX_SERVICE_SUFFIX}.loadbalancer.server.port=8112
+    networks:
+      - default
+      - reverse-proxy
+  medusa:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.medusa${STEALTHBOX_SERVICE_SUFFIX}.rule=Host(`medusa.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.medusa${STEALTHBOX_SERVICE_SUFFIX}.service=medusa${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.routers.medusa${STEALTHBOX_SERVICE_SUFFIX}-tls.rule=Host(`medusa.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.medusa${STEALTHBOX_SERVICE_SUFFIX}-tls.tls=true
+      - traefik.http.routers.medusa${STEALTHBOX_SERVICE_SUFFIX}-tls.tls.certresolver=letsencrypt
+      - traefik.http.routers.medusa${STEALTHBOX_SERVICE_SUFFIX}-tls.service=medusa${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.services.medusa${STEALTHBOX_SERVICE_SUFFIX}.loadbalancer.server.port=8081
+    networks:
+      - default
+      - reverse-proxy
+  couchpotato:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.couchpotato${STEALTHBOX_SERVICE_SUFFIX}.rule=Host(`couchpotato.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.couchpotato${STEALTHBOX_SERVICE_SUFFIX}.service=couchpotato${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.routers.couchpotato${STEALTHBOX_SERVICE_SUFFIX}-tls.rule=Host(`couchpotato.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.couchpotato${STEALTHBOX_SERVICE_SUFFIX}-tls.tls=true
+      - traefik.http.routers.couchpotato${STEALTHBOX_SERVICE_SUFFIX}-tls.tls.certresolver=letsencrypt
+      - traefik.http.routers.couchpotato${STEALTHBOX_SERVICE_SUFFIX}-tls.service=couchpotato${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.services.couchpotato${STEALTHBOX_SERVICE_SUFFIX}.loadbalancer.server.port=5050
+    networks:
+      - default
+      - reverse-proxy
+  headphones:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.headphones${STEALTHBOX_SERVICE_SUFFIX}.rule=Host(`headphones.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.headphones${STEALTHBOX_SERVICE_SUFFIX}.service=headphones${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.routers.headphones${STEALTHBOX_SERVICE_SUFFIX}-tls.rule=Host(`headphones.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.headphones${STEALTHBOX_SERVICE_SUFFIX}-tls.tls=true
+      - traefik.http.routers.headphones${STEALTHBOX_SERVICE_SUFFIX}-tls.tls.certresolver=letsencrypt
+      - traefik.http.routers.headphones${STEALTHBOX_SERVICE_SUFFIX}-tls.service=headphones${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.services.headphones${STEALTHBOX_SERVICE_SUFFIX}.loadbalancer.server.port=8181
+    networks:
+      - default
+      - reverse-proxy
+  pydio-nginx:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pydio${STEALTHBOX_SERVICE_SUFFIX}.rule=Host(`pydio.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.pydio${STEALTHBOX_SERVICE_SUFFIX}.service=pydio${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.routers.pydio${STEALTHBOX_SERVICE_SUFFIX}-tls.rule=Host(`pydio.${STEALTHBOX_DOMAIN}`)
+      - traefik.http.routers.pydio${STEALTHBOX_SERVICE_SUFFIX}-tls.tls=true
+      - traefik.http.routers.pydio${STEALTHBOX_SERVICE_SUFFIX}-tls.tls.certresolver=letsencrypt
+      - traefik.http.routers.pydio${STEALTHBOX_SERVICE_SUFFIX}-tls.service=pydio${STEALTHBOX_SERVICE_SUFFIX}
+      - traefik.http.services.pydio${STEALTHBOX_SERVICE_SUFFIX}.loadbalancer.server.port=80
+    networks:
+      - default
+      - reverse-proxy

@@ -5,10 +5,6 @@ networks:
     external: true
 services:
   deluge-web:
-    environment:
-      - VIRTUAL_HOST=deluge.${STEALTHBOX_DOMAIN}
-      - VIRTUAL_PORT=8112
-      - LETSENCRYPT_HOST=deluge.${STEALTHBOX_DOMAIN}
     labels:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:deluge.${STEALTHBOX_DOMAIN}'
@@ -17,10 +13,6 @@ services:
       - default
       - reverse-proxy
   medusa:
-    environment:
-      - VIRTUAL_HOST=medusa.${STEALTHBOX_DOMAIN}
-      - VIRTUAL_PORT=8081
-      - LETSENCRYPT_HOST=medusa.${STEALTHBOX_DOMAIN}
     labels:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:medusa.${STEALTHBOX_DOMAIN}'
@@ -29,10 +21,6 @@ services:
       - default
       - reverse-proxy
   couchpotato:
-    environment:
-      - VIRTUAL_HOST=couchpotato.${STEALTHBOX_DOMAIN}
-      - VIRTUAL_PORT=5050
-      - LETSENCRYPT_HOST=couchpotato.${STEALTHBOX_DOMAIN}
     labels:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:couchpotato.${STEALTHBOX_DOMAIN}'
@@ -41,10 +29,6 @@ services:
       - default
       - reverse-proxy
   headphones:
-    environment:
-      - VIRTUAL_HOST=headphones.${STEALTHBOX_DOMAIN}
-      - VIRTUAL_PORT=8181
-      - LETSENCRYPT_HOST=headphones.${STEALTHBOX_DOMAIN}
     labels:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:headphones.${STEALTHBOX_DOMAIN}'
@@ -53,10 +37,6 @@ services:
       - default
       - reverse-proxy
   pydio-nginx:
-    environment:
-      - VIRTUAL_HOST=pydio.${STEALTHBOX_DOMAIN}
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=pydio.${STEALTHBOX_DOMAIN}
     labels:
       - traefik.enable=true
       - 'traefik.frontend.rule=Host:pydio.${STEALTHBOX_DOMAIN}'

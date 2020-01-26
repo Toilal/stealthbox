@@ -1,0 +1,46 @@
+version: '2.2'
+networks:
+  reverse-proxy:
+    name: ${REVERSE_PROXY_NETWORK_NAME}
+    external: true
+services:
+  deluge-web:
+    environment:
+      - VIRTUAL_HOST=deluge.${STEALTHBOX_DOMAIN}
+      - VIRTUAL_PORT=8112
+      - LETSENCRYPT_HOST=deluge.${STEALTHBOX_DOMAIN}
+    networks:
+      - default
+      - reverse-proxy
+  medusa:
+    environment:
+      - VIRTUAL_HOST=medusa.${STEALTHBOX_DOMAIN}
+      - VIRTUAL_PORT=8081
+      - LETSENCRYPT_HOST=medusa.${STEALTHBOX_DOMAIN}
+    networks:
+      - default
+      - reverse-proxy
+  couchpotato:
+    environment:
+      - VIRTUAL_HOST=couchpotato.${STEALTHBOX_DOMAIN}
+      - VIRTUAL_PORT=5050
+      - LETSENCRYPT_HOST=couchpotato.${STEALTHBOX_DOMAIN}
+    networks:
+      - default
+      - reverse-proxy
+  headphones:
+    environment:
+      - VIRTUAL_HOST=headphones.${STEALTHBOX_DOMAIN}
+      - VIRTUAL_PORT=8181
+      - LETSENCRYPT_HOST=headphones.${STEALTHBOX_DOMAIN}
+    networks:
+      - default
+      - reverse-proxy
+  pydio-nginx:
+    environment:
+      - VIRTUAL_HOST=pydio.${STEALTHBOX_DOMAIN}
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=pydio.${STEALTHBOX_DOMAIN}
+    networks:
+      - default
+      - reverse-proxy
