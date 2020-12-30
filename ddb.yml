@@ -1,0 +1,9 @@
+stealthbox:
+  deluge:
+    password: "box"
+  ssh:
+    login: "box"
+    password: "box"
+permissions:
+  specs:
+    .docker/sshd/entrypoint.sh: "+x"

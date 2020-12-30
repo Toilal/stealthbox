@@ -1,0 +1,4 @@
+user: {{ stealthbox.ssh.login }}
+group: {{ stealthbox.ssh.login }}
+paths:
+  - /

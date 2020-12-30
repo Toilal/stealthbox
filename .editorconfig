@@ -7,5 +7,5 @@ root = true
 indent_style = space
 indent_size = 4
 
-[*{.conf,.yml,.json}]
+[*{.conf,.yml,.json,.md}]
 indent_size = 2

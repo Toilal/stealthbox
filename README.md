@@ -2,23 +2,23 @@
 
 Share your favorite content remotely without spoiling your home network.
 
-StealthBox is a set of [Docker](https://www.docker.com/) images, so you can install it on any linux server without 
+StealthBox is a set of [Docker](https://www.docker.com/) images, so you can install it on any linux server without
 polluting it.
 
 It embeds several applications that are configured together to automate file sharing in the cloud and download content
 to your home:
 
 - [Deluge](http://deluge-torrent.org/), a BitTorrent client.
-- [Medusa](https://pymedusa.com/), an automatic shows downloader.
-- [CouchPotato](https://couchpota.to/), an automatic movies downloader.
-- [HeadPhones](https://github.com/rembo10/headphones), an automated music downloader.
+- [Medusa](https://pymedusa.com/), an automatic shows downloader. (TODO)
+- [CouchPotato](https://couchpota.to/), an automatic movies downloader. (TODO)
+- [HeadPhones](https://github.com/rembo10/headphones), an automated music downloader. (TODO)
 - [Sonarr](https://sonarr.tv/). (TODO)
 - [Pydio](https://pyd.io/), a web application to view, edit and download files. (TODO)
 
 ## Requirements
 
-- `docker 1.13.0+`
-- `docker-compose 1.13.0+`
+- A linux box with a wildcard domain name configured (`domain.tld`)
+- [docker-devbox](https://github.com/gfi-centre-ouest/docker-devbox)
 
 ## Install
 
@@ -29,46 +29,47 @@ $ git clone https://github.com/Toilal/stealthbox
 $ cd stealthbox
 ```
 
-- Copy `.env.dist` file to `.env` and customize settings
+- Create `ddb.local.yml` file with the following content. You should customize your accounts and passwords.
 
-```bash
-$ cp .env.dist .env
-$ editor .env
+```yaml
+core:
+  env:
+    current: prod
+  domain:
+    ext: domain.tld
+docker:
+  reverse_proxy:
+    certresolver: letsencrypt
+stealthbox:
+  deluge:
+    password: "box"
+  ssh:
+    login: "box"
+    password: "box"
 ```
 
-- Symlink `docker-compose.override.standalone.yml` to `docker-compose.override.yml`
+- Generate all files based on your configuration.
 
 ```bash
-$ ln -s docker-compose.override.standalone.yml docker-compose.override.yml
+$ ddb configure
 ```
 
-- Copy `stealthbox-conf/stealthbox.json` to `stealthbox.json` and customize configuration.
-
-```bash
-$ cp stealthbox-conf/conf/stealthbox.json stealthbox.json
-$ editor stealthbox.json
-```
-
-- Build docker images. It may take a long time, please be patient :)
+- Build docker-compose stack.
 
 ```bash
 $ docker-compose build
 ```
 
-- Launch services.
+- Start docker-compose stack.
 
 ```bash
-$ docker-compose up
+$ docker-compose up -d
 ```
-
-*You can edit `stealthbox.json` configuration at any time, but it requires to restart services again with 
-`docker-compose restart` for changes to be effective.*
 
 ## URLs
 
-- Deluge: [http://localhost:50080/deluge](http://localhost:50080/deluge)
-- Medusa: [http://localhost:50080/medusa](http://localhost:50080/medusa)
-- CouchPotato: [http://localhost:50080/couchpotato](http://localhost:50080/couchpotato)
-- HeadPhones: [http://localhost:50080/headphones](http://localhost:50080/headphones)
+You can get URLs and ports of all services by running the following command
 
-*Note: Windows user must use the docker-machine ip instead of localhost.*
+```bash
+$ ddb info
+```

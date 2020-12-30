@@ -1,5 +1,21 @@
-*.db-shm
-*.db-wal
 .env
 /stealthbox.json
+__pycache__
 docker-compose.override.yml
+###> gfi-centre-ouest/docker-devbox ###
+/.docker/deluge/Dockerfile
+/.docker/stealthbox-tools/Dockerfile
+/.docker/stealthbox-conf/Dockerfile
+/.docker/sshd/Dockerfile
+/*ddb.local.*
+/.bash_enter
+/.bash_leave
+/docker-compose.yml
+/.certs/deluge.stealthbox.test.key
+/.certs/deluge.stealthbox.test.crt
+/.certs/.signer.crt
+/.docker/deluge/fixuid.tar.gz
+/.docker/sshd/fixuid.tar.gz
+/.docker/sshd/fixuid.yml
+/.docker/sshd/entrypoint.sh
+###< gfi-centre-ouest/docker-devbox ###

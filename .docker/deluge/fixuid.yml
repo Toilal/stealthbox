@@ -1,0 +1,6 @@
+user: nobody
+group: nobody
+paths:
+  - /
+  - /config
+  - /data
