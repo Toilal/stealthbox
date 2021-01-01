@@ -23,6 +23,20 @@ ddb.Compose({
                         ddb.path.project + "/deluge/data:/data"
                     ]
                 },
+    	jackett: ddb.Build("jackett") +
+                 ddb.User() +
+                 ddb.VirtualHost(9117, "jackett." + domain, "jackett") + {
+                     environment+: {},
+                     volumes: [
+                         ddb.path.project + "/jackett/config:/config",
+                         ddb.path.project + "/jackett/data:/data"
+                     ]
+                 },
+        flaresolverr: ddb.Image("flaresolverr/flaresolverr") + {
+            environment+: {
+              LOG_LEVEL: "info"
+            },
+        },
     	sshd: ddb.Build("sshd") +
               {
                   ports: [pp+'22:22'],

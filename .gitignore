@@ -1,5 +1,7 @@
 .env
 /stealthbox.json
+/deluge
+/jackett
 __pycache__
 docker-compose.override.yml
 ###> gfi-centre-ouest/docker-devbox ###
@@ -18,4 +20,8 @@ docker-compose.override.yml
 /.docker/sshd/fixuid.tar.gz
 /.docker/sshd/fixuid.yml
 /.docker/sshd/entrypoint.sh
+/.certs/jackett.stealthbox.test.key
+/.certs/jackett.stealthbox.test.crt
+/.docker/jackett/Dockerfile
+/.docker/jackett/fixuid.tar.gz
 ###< gfi-centre-ouest/docker-devbox ###
