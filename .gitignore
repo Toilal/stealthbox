@@ -3,6 +3,7 @@
 /deluge/
 /jackett/
 /sonarr/
+/radarr/
 __pycache__
 docker-compose.override.yml
 ###> gfi-centre-ouest/docker-devbox ###
@@ -28,4 +29,9 @@ docker-compose.override.yml
 /.certs/sonarr.stealthbox.test.key
 /.certs/sonarr.stealthbox.test.crt
 /.docker/sonarr/Dockerfile
+/.docker/radarr/Dockerfile
+/.docker/radarr/fixuid.tar.gz
+/.docker/sonarr/fixuid.tar.gz
+/.certs/radarr.stealthbox.test.key
+/.certs/radarr.stealthbox.test.crt
 ###< gfi-centre-ouest/docker-devbox ###

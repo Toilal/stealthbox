@@ -43,6 +43,16 @@ ddb.Compose({
                     environment+: {},
                     volumes: [
                         ddb.path.project + "/sonarr/config:/config",
+                        ddb.path.project + "/sonarr/data:/data"
+                    ]
+                },
+    	radarr: ddb.Build("radarr") +
+                ddb.User() +
+                ddb.VirtualHost(7878, "radarr." + domain, "radarr") + {
+                    environment+: {},
+                    volumes: [
+                        ddb.path.project + "/radarr/config:/config",
+                        ddb.path.project + "/radarr/data:/data",
                     ]
                 },
     	sshd: ddb.Build("sshd") +
