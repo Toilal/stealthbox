@@ -2,6 +2,7 @@
 /jackett/
 /sonarr/
 /radarr/
+/lidarr/
 __pycache__
 ###> gfi-centre-ouest/docker-devbox ###
 /.docker/deluge/Dockerfile
@@ -31,4 +32,8 @@ __pycache__
 /.certs/radarr.stealthbox.test.key
 /.certs/radarr.stealthbox.test.crt
 /docker-compose.yml
+/.docker/lidarr/Dockerfile
+/.docker/lidarr/fixuid.tar.gz
+/.certs/lidarr.stealthbox.test.key
+/.certs/lidarr.stealthbox.test.crt
 ###< gfi-centre-ouest/docker-devbox ###

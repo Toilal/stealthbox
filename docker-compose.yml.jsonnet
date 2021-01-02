@@ -55,6 +55,15 @@ ddb.Compose({
                         ddb.path.project + "/radarr/data:/data",
                     ]
                 },
+    	lidarr: ddb.Build("lidarr") +
+                ddb.User() +
+                ddb.VirtualHost(8686, "lidarr." + domain, "lidarr") + {
+                    environment+: {},
+                    volumes: [
+                        ddb.path.project + "/lidarr/config:/lidarr",
+                        ddb.path.project + "/lidarr/data:/data",
+                    ]
+                },
     	sshd: ddb.Build("sshd") +
               {
                   ports: [pp+'22:22'],
