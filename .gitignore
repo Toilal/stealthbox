@@ -1,11 +1,8 @@
-.env
-/stealthbox.json
 /deluge/
 /jackett/
 /sonarr/
 /radarr/
 __pycache__
-docker-compose.override.yml
 ###> gfi-centre-ouest/docker-devbox ###
 /.docker/deluge/Dockerfile
 /.docker/stealthbox-tools/Dockerfile
@@ -14,7 +11,6 @@ docker-compose.override.yml
 /*ddb.local.*
 /.bash_enter
 /.bash_leave
-/docker-compose.yml
 /.certs/deluge.stealthbox.test.key
 /.certs/deluge.stealthbox.test.crt
 /.certs/.signer.crt
@@ -34,4 +30,5 @@ docker-compose.override.yml
 /.docker/sonarr/fixuid.tar.gz
 /.certs/radarr.stealthbox.test.key
 /.certs/radarr.stealthbox.test.crt
+/docker-compose.yml
 ###< gfi-centre-ouest/docker-devbox ###
