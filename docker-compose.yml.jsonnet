@@ -37,6 +37,14 @@ ddb.Compose({
               LOG_LEVEL: "info"
             },
         },
+    	sonarr: ddb.Build("sonarr") +
+                ddb.User() +
+                ddb.VirtualHost(8989, "sonarr." + domain, "sonarr") + {
+                    environment+: {},
+                    volumes: [
+                        ddb.path.project + "/sonarr/config:/config",
+                    ]
+                },
     	sshd: ddb.Build("sshd") +
               {
                   ports: [pp+'22:22'],
