@@ -9,7 +9,7 @@ local stealthbox_ssh_password = std.extVar("stealthbox.ssh.password");
 
 local domain = std.join('.', [domain_sub, domain_ext]);
 
-ddb.Compose({
+local compose = ddb.Compose({
     services: {
     	deluge: ddb.Build("deluge") +
                 ddb.User() +
@@ -70,9 +70,21 @@ ddb.Compose({
                   environment+: {
                     [if stealthbox_ssh_password != null then 'SSH_PASSWORD']: stealthbox_ssh_password
                   },
-                  volumes: [
-                      ddb.path.project + "/deluge/data:/data"
-                  ]
+                  volumes+: []
               }
         }
-})
+});
+
+compose + {
+    services+: {
+      sshd+: {
+        volumes+: std.filter(function(x) if x != null then true else false, [
+             if (std.objectHas(compose.services, "deluge")) then ddb.path.project + "/deluge:/deluge" else null,
+             if (std.objectHas(compose.services, "jackett")) then ddb.path.project + "/jackett:/jackett" else null,
+             if (std.objectHas(compose.services, "sonarr")) then ddb.path.project + "/sonarr:/sonarr" else null,
+             if (std.objectHas(compose.services, "radarr")) then ddb.path.project + "/radarr:/radarr" else null,
+             if (std.objectHas(compose.services, "lidarr")) then ddb.path.project + "/lidarr:/lidarr" else null,
+           ])
+      }
+    }
+}
