@@ -8,12 +8,11 @@ polluting it.
 It embeds several applications that are configured together to automate file sharing in the cloud and download content
 to your home:
 
-- [Deluge](http://deluge-torrent.org/), a BitTorrent client.
-- [Medusa](https://pymedusa.com/), an automatic shows downloader. (TODO)
-- [CouchPotato](https://couchpota.to/), an automatic movies downloader. (TODO)
-- [HeadPhones](https://github.com/rembo10/headphones), an automated music downloader. (TODO)
-- [Sonarr](https://sonarr.tv/). (TODO)
-- [Pydio](https://pyd.io/), a web application to view, edit and download files. (TODO)
+- [Deluge](https://deluge-torrent.org/), a BitTorrent client.
+- [Jackett](https://github.com/Jackett/Jackett).
+- [Sonarr](https://sonarr.tv/).
+- [Radarr](https://radarr.video/).
+- [Lidarr](https://lidarr.audio/).
 
 ## Requirements
 
