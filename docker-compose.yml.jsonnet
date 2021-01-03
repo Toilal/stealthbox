@@ -5,6 +5,7 @@ local domain_ext = std.extVar("core.domain.ext");
 local domain_sub = std.extVar("core.domain.sub");
 local stealthbox_deluge_salt = std.extVar("stealthbox.deluge.salt");
 local stealthbox_deluge_sha1 = std.extVar("stealthbox.deluge.sha1");
+local stealthbox_ssh_login = std.extVar("stealthbox.ssh.login");
 local stealthbox_ssh_password = std.extVar("stealthbox.ssh.password");
 
 local domain = std.join('.', [domain_sub, domain_ext]);
@@ -81,11 +82,11 @@ compose + {
     services+: {
       sshd+: {
         volumes+: std.filter(function(x) if x != null then true else false, [
-             if (std.objectHas(compose.services, "deluge")) then ddb.path.project + "/deluge:/deluge" else null,
-             if (std.objectHas(compose.services, "jackett")) then ddb.path.project + "/jackett:/jackett" else null,
-             if (std.objectHas(compose.services, "sonarr")) then ddb.path.project + "/sonarr:/sonarr" else null,
-             if (std.objectHas(compose.services, "radarr")) then ddb.path.project + "/radarr:/radarr" else null,
-             if (std.objectHas(compose.services, "lidarr")) then ddb.path.project + "/lidarr:/lidarr" else null,
+             if (std.objectHas(compose.services, "deluge")) then ddb.path.project + "/deluge:/home/" + stealthbox_ssh_login + "/deluge" else null,
+             if (std.objectHas(compose.services, "jackett")) then ddb.path.project + "/jackett:/home/" + stealthbox_ssh_login + "/jackett" else null,
+             if (std.objectHas(compose.services, "sonarr")) then ddb.path.project + "/sonarr:/home/" + stealthbox_ssh_login + "/sonarr" else null,
+             if (std.objectHas(compose.services, "radarr")) then ddb.path.project + "/radarr:/home/" + stealthbox_ssh_login + "/radarr" else null,
+             if (std.objectHas(compose.services, "lidarr")) then ddb.path.project + "/lidarr:/home/" + stealthbox_ssh_login + "/lidarr" else null,
            ])
       }
     }
