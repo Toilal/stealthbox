@@ -1,0 +1,2 @@
+docker:
+  disabled_services: ['jackett', 'sonarr', 'radarr', 'lidarr', 'flaresolverr']
