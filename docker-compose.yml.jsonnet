@@ -70,7 +70,9 @@ local compose = ddb.Compose({
                   environment+: {
                     [if stealthbox_ssh_password != null then 'SSH_PASSWORD']: stealthbox_ssh_password
                   },
-                  volumes+: []
+                  volumes+: [
+                    "ssh-config:/etc/ssh"
+                  ]
               }
         }
 });
