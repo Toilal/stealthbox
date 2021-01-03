@@ -7,6 +7,8 @@ local stealthbox_deluge_salt = std.extVar("stealthbox.deluge.salt");
 local stealthbox_deluge_sha1 = std.extVar("stealthbox.deluge.sha1");
 local stealthbox_ssh_login = std.extVar("stealthbox.ssh.login");
 local stealthbox_ssh_password = std.extVar("stealthbox.ssh.password");
+local host_gid = std.extVar("docker.user.gid");
+local host_uid = std.extVar("docker.user.uid");
 
 local domain = std.join('.', [domain_sub, domain_ext]);
 
@@ -69,7 +71,9 @@ local compose = ddb.Compose({
               {
                   ports: [pp+'22:22'],
                   environment+: {
-                    [if stealthbox_ssh_password != null then 'SSH_PASSWORD']: stealthbox_ssh_password
+                    [if stealthbox_ssh_password != null then 'SSH_PASSWORD']: stealthbox_ssh_password,
+                    HOST_GID: host_gid,
+                    HOST_UID: host_uid
                   },
                   volumes+: [
                     "ssh-config:/etc/ssh"

@@ -1,7 +1,7 @@
 FROM alpine:edge
 MAINTAINER Rémi Alvergnat <toilal.dev@gmail.com>
 
-RUN apk add --update openssh && rm -rf /var/cache/apk/*
+RUN apk add --update openssh shadow && rm -rf /var/cache/apk/*
 
 RUN addgroup -S {{ stealthbox.ssh.login }} && adduser -S {{ stealthbox.ssh.login }} -G {{ stealthbox.ssh.login }} -s /bin/sh
 

@@ -16,8 +16,6 @@ __pycache__
 /.certs/deluge.stealthbox.test.crt
 /.certs/.signer.crt
 /.docker/deluge/fixuid.tar.gz
-/.docker/sshd/fixuid.tar.gz
-/.docker/sshd/fixuid.yml
 /.docker/sshd/entrypoint.sh
 /.certs/jackett.stealthbox.test.key
 /.certs/jackett.stealthbox.test.crt
@@ -31,9 +29,9 @@ __pycache__
 /.docker/sonarr/fixuid.tar.gz
 /.certs/radarr.stealthbox.test.key
 /.certs/radarr.stealthbox.test.crt
-/docker-compose.yml
 /.docker/lidarr/Dockerfile
 /.docker/lidarr/fixuid.tar.gz
 /.certs/lidarr.stealthbox.test.key
 /.certs/lidarr.stealthbox.test.crt
+/docker-compose.yml
 ###< gfi-centre-ouest/docker-devbox ###
