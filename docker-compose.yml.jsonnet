@@ -63,7 +63,7 @@ local compose = ddb.Compose({
                 ddb.VirtualHost(8686, "lidarr." + domain, "lidarr") + {
                     environment+: {},
                     volumes: [
-                        ddb.path.project + "/lidarr/config:/lidarr",
+                        ddb.path.project + "/lidarr/config:/config",
                         ddb.path.project + "/lidarr/data:/data",
                     ]
                 },

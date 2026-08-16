@@ -1,19 +1,20 @@
-FROM ubuntu:focal
+FROM ubuntu:26.04
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir -p /app/Radarr && mkdir -p /tmp/Radarr && \
-apt-get update && apt-get install -y curl &&\
-curl -o /tmp/Radarr/Radarr.tar.gz -L "https://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64" &&\
-tar zxf /tmp/Radarr/Radarr.tar.gz -C /app/Radarr --strip-components=1 && rm -rf /tmp/Radarr* &&\
-apt-get purge -y curl && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y libicu66 && rm -rf /var/lib/apt/lists/*
+apt-get update && \
+apt-get install -y --no-install-recommends ca-certificates libicu78 libsqlite3-0 curl && \
+curl -o /tmp/Radarr/Radarr.tar.gz -L "https://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64" && \
+tar zxf /tmp/Radarr/Radarr.tar.gz -C /app/Radarr --strip-components=1 && rm -rf /tmp/Radarr* && \
+apt-get purge -y curl && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /config && mkdir -p /data && chown -R nobody:nogroup /app /config /data
 USER nobody
 
 VOLUME /config /data
 
-EXPOSE 8989
+EXPOSE 7878
 
 ENV XDG_CONFIG_HOME="/config"
 WORKDIR /app/Radarr
