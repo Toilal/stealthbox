@@ -1,6 +1,6 @@
 local ddb = import 'ddb.docker.libjsonnet';
 
-local pp = std.extVar("docker.port_prefix");
+local pp = std.extVar("jsonnet.docker.expose.port_prefix");
 local domain_ext = std.extVar("core.domain.ext");
 local domain_sub = std.extVar("core.domain.sub");
 local stealthbox_deluge_salt = std.extVar("stealthbox.deluge.salt");
